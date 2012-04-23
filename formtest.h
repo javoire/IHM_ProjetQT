@@ -1,14 +1,17 @@
 #ifndef FORMTEST_H
 #define FORMTEST_H
 
+#include <QMainWindow>
 #include <QWidget>
 #include <QString>
+#include <QSlider>
+#include <graphwidget.h>
 
 namespace Ui {
 class FormTest;
 }
 
-class FormTest : public QWidget
+class FormTest : public QMainWindow
 {
     Q_OBJECT
     
@@ -22,6 +25,8 @@ private slots:
 
 private:
     Ui::FormTest *ui;
+    QSlider* yearToSlider;
+    GraphWidget* graphWidget;
 
 };
 

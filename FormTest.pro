@@ -11,8 +11,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        formtest.cpp
+        formtest.cpp \
+    graphwidget.cpp
 
-HEADERS  += formtest.h
+HEADERS  += formtest.h \
+    graphwidget.h
 
 FORMS    += formtest.ui
