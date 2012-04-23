@@ -3,6 +3,7 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include "slider.h"
 
 class GraphWidget : public QGraphicsView
 {
@@ -16,6 +17,7 @@ public slots:
 
 private:
     QGraphicsScene *scene;
+    Slider *yearFrom;
     
 };
 
