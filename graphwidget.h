@@ -10,6 +10,7 @@ class GraphWidget : public QGraphicsView
     Q_OBJECT
 public:
     explicit GraphWidget(QWidget *parent = 0);
+    void itemMoved();
     
 signals:
     
@@ -18,7 +19,8 @@ public slots:
 private:
     QGraphicsScene *scene;
     Slider *yearFrom;
-    
+    Slider *yearTo;
+
 };
 
 #endif // GRAPHWIDGET_H
