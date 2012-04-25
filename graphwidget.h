@@ -11,6 +11,7 @@ class GraphWidget : public QGraphicsView
 public:
     explicit GraphWidget(QWidget *parent = 0);
     void itemMoved();
+    void detectCollisions(Slider *item);
     
 signals:
     

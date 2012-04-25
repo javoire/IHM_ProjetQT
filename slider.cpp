@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Slider::Slider(GraphWidget *graphWidget)
+Slider::Slider(GraphWidget *graphWidget, char *name)
     : graph(graphWidget)
 {
     setFlag(ItemIsMovable);
@@ -16,7 +16,7 @@ Slider::Slider(GraphWidget *graphWidget)
     setCacheMode(DeviceCoordinateCache);
     setZValue(-1);
 
-    this->setY(20);
+    sliderName = name;
 }
 
 QRectF Slider::boundingRect() const
@@ -33,22 +33,30 @@ QPainterPath Slider::shape() const
     return path;
 }
 
-//bool Slider::collidesWithItem ( const QGraphicsItem * other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape ) {
+void detectCollision() {
 
-//    update();
-////    cout << other->x() << other->y() << endl;
+}
 
-//    if (this->contains(other->pos())) {
-//        cout << 'coll';
-//        return true;
-//    }
-//}
+bool Slider::collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode) const {
+
+
+    bool collision = QGraphicsItem::collidesWithItem(other, mode);
+
+    if(collision) {
+        cout << other->x() << endl;
+    }
+
+    return collision;
+
+}
 
 QVariant Slider::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     switch (change) {
     case ItemPositionHasChanged:
         graph->itemMoved();
+        graph->detectCollisions(this);
+//        cout << sliderName << endl;
         break;
     default:
         break;
@@ -65,7 +73,6 @@ void Slider::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 
 void Slider::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     update();
-//    this->setY(30);
     QGraphicsItem::mouseMoveEvent(event);
 }
 
