@@ -4,16 +4,16 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
-#include "slidergrab.h"
+#include "sliderhandle.h"
 
 class GraphWidget : public QGraphicsView
 {
     Q_OBJECT
 public:
     explicit GraphWidget(QWidget *parent = 0);
-    void itemMoved(SliderGrab *item = 0);
-    void detectCollisions(SliderGrab *item);
-    void itemReleased(SliderGrab *item = 0);
+    void itemMoved(SliderHandle *item = 0);
+    void detectCollisions(SliderHandle *item);
+    void itemReleased(SliderHandle *item = 0);
     
 signals:
     
@@ -22,12 +22,19 @@ public slots:
 private:
     QGraphicsScene *scene;
     QGraphicsRectItem *slider;
-    QPoint startPoint;
-    QPoint endPoint;
-    SliderGrab *yearFrom;
-    SliderGrab *yearFromHandle;
-    SliderGrab *yearTo;
-    SliderGrab *yearToHandle;
+    QGraphicsRectItem *sliderBG;
+    QPoint leftPoint;
+    QPoint rightPoint;
+    QPoint sliderPos;
+    SliderHandle *handleLeft;
+    SliderHandle *handleRight;
+    SliderHandle *visibleHandleLeft;
+    SliderHandle *visibleHandleRight;
+    double sliderHeight;
+    double sliderWidth;
+    double handleWidth;
+    double sliderMinWidth;
+
 };
 
 #endif // GRAPHWIDGET_H

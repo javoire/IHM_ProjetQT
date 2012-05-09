@@ -1,5 +1,5 @@
 #include "graphwidget.h"
-#include "slidergrab.h"
+#include "sliderhandle.h"
 #include "math.h"
 
 #include <iostream>
@@ -22,102 +22,121 @@ GraphWidget::GraphWidget(QWidget *parent) :
     setMinimumSize(600, 600);
     setWindowTitle(tr("Slider"));
 
-    yearFrom = new SliderGrab(this, "yearFrom");
-    yearTo = new SliderGrab(this, "yearTo");
-    yearFromHandle = new SliderGrab(this, "yearFromHandle");
-    yearToHandle = new SliderGrab(this, "yearToHandle");
+    // global vars
+    sliderHeight = 30;
+    sliderWidth = 400;
+    handleWidth = 50;
+    sliderMinWidth = 0 + 2 * handleWidth;
+    sliderPos.setX(100);
+    sliderPos.setY(200);
 
-//    startPoint.setX(200);
-//    startPoint.setY(300);
-//    endPoint.setX(300);
-//    endPoint.setY(320);
+    // size of slider
+    leftPoint.setX(sliderPos.x());
+    leftPoint.setY(sliderPos.y());
+    rightPoint.setX(sliderPos.x()+sliderWidth);
+    rightPoint.setY(sliderPos.y()+sliderHeight);
 
-    yearFrom->setPos(0, 0);
-    yearTo->setPos(200, 0);
-    yearFromHandle->setPos(yearFrom->x(), 100);
-    yearToHandle->setPos(yearTo->x(), 100);
+    // create the elements
+    sliderBG = new QGraphicsRectItem(QRect(leftPoint, rightPoint));
+    slider = new QGraphicsRectItem(QRect(leftPoint, rightPoint));
+    handleLeft = new SliderHandle(this, "sliderLeft", handleWidth, sliderHeight);
+    handleRight = new SliderHandle(this, "sliderRight", handleWidth, sliderHeight);
+    visibleHandleLeft = new SliderHandle(this, "sliderLeft", handleWidth, sliderHeight);
+    visibleHandleRight = new SliderHandle(this, "sliderRight", handleWidth, sliderHeight);
 
-    startPoint.setX(yearFrom->x()+60);
-    startPoint.setY(300);
-    endPoint.setX(yearTo->x()+60);
-    endPoint.setY(320);
+    visibleHandleLeft->setMovable(false);
+    visibleHandleRight->setMovable(false);
 
-    slider = new QGraphicsRectItem(QRect(startPoint, endPoint));
+    // position handles
+    handleRight->setX(rightPoint.x()-handleWidth);
+    handleRight->setY(sliderPos.y());
+    handleLeft->setX(leftPoint.x());
+    handleLeft->setY(sliderPos.y());
+
+    visibleHandleLeft->setPos(handleLeft->pos());
+    visibleHandleRight->setPos(handleRight->pos());
 
     scene->addItem(slider);
-    scene->addItem(yearFrom);
-    scene->addItem(yearTo);
-    scene->addItem(yearFromHandle);
-    scene->addItem(yearToHandle);
-
-//    connect(yearFrom, SIGNAL(xChanged()), yearTo, SLOT(isDragged()));
-//    connect(yearFrom, zChanged(), )
-}
-
-void GraphWidget::detectCollisions(SliderGrab *item) {
-
-    QList<QGraphicsItem*> allItems = this->items();
-
-    (QGraphicsObject*)item = item;
-
-    int i = 0;
-    for (i=0; i<allItems.count(); i++) {
-
-        QGraphicsItem* other = allItems[i];
-
-        if(item == yearTo || item == yearFrom) { // only collide these for now
-
-            if(item != other) { // skip itself
-                if(item->collidesWithItem(other)) {
-
-                    double dx = 1;
-                    double dy = 1;
-
-                    dx = item->x()-other->x();
-                    dy = item->y()-other->y();
-
-                    // distance to center of yearFrom?
-                    double dd = sqrt(pow(dx, 2) + pow(dy, 2));
-
-    //                other->moveBy(-dx/dd,-dy/dd); // calculate direction and repel other from item
-                    other->moveBy(-dx/dd,0); // calculate direction and repel other from item
-                }
-            }
-        }
-    }
-}
-
-void GraphWidget::itemReleased(SliderGrab *item) {
-    if(item == yearFromHandle)
-        item->setY(100);
-    if(item == yearToHandle)
-        item->setY(100);
+    scene->addItem(sliderBG);
+    scene->addItem(handleLeft);
+    scene->addItem(handleRight);
+    scene->addItem(visibleHandleLeft);
+    scene->addItem(visibleHandleRight);
 
 }
 
-void GraphWidget::itemMoved(SliderGrab *item) {
-    if (item == yearFromHandle) {
-        yearFrom->setX(item->x());
-//        startPoint.setX(item->x()+60);
-//        slider->setRect(QRect(startPoint, endPoint));
+void GraphWidget::detectCollisions(SliderHandle *item) {
+
+    //    QList<QGraphicsItem*> allItems = this->items();
+
+    //    (QGraphicsObject*)item = item;
+
+    //    int i = 0;
+    //    for (i=0; i<allItems.count(); i++) {
+
+    //        QGraphicsItem* other = allItems[i];
+
+    //        if(item == yearTo || item == yearFrom) { // only collide these for now
+
+    //            if(item != other) { // skip itself
+    //                if(item->collidesWithItem(other)) {
+
+    //                    double dx = 1;
+    //                    double dy = 1;
+
+    //                    dx = item->x()-other->x();
+    //                    dy = item->y()-other->y();
+
+    //                    // distance to center of yearFrom?
+    //                    double dd = sqrt(pow(dx, 2) + pow(dy, 2));
+
+    //    //                other->moveBy(-dx/dd,-dy/dd); // calculate direction and repel other from item
+    //                    other->moveBy(-dx/dd,0); // calculate direction and repel other from item
+    //                }
+    //            }
+    //        }
+    //    }
+}
+
+void GraphWidget::itemReleased(SliderHandle *item) {
+    if ( item == handleLeft)
+        item->setY(sliderPos.y());
+    if ( item == handleRight)
+        item->setY(sliderPos.y());
+}
+
+void GraphWidget::itemMoved(SliderHandle *item) {
+
+    if (item == handleLeft) {
+
+        visibleHandleLeft->setX(handleLeft->x()); // move the visual handle with the real handle
+
+        leftPoint.setX(handleLeft->x()); // adjust slider size with handle movement
+        slider->setRect(QRect(leftPoint, rightPoint));
+
+        if ( item->x() > handleRight->x()-sliderMinWidth) // collide with and push other handle
+            handleRight->setX(item->x()+sliderMinWidth);
+
+        double xmin = sliderBG->rect().topLeft().x(); // find left boundary
+
+        if (item->x() < xmin) // don't exceed sliders boundaries
+            item->setX(xmin);
     }
 
-    if (item == yearToHandle) {
-        yearTo->setX(item->x());
-//        endPoint.setX(item->x()+60);
-//        slider->setRect(QRect(startPoint, endPoint));
+    if (item == handleRight) {
+
+        visibleHandleRight->setX(handleRight->x());
+
+        rightPoint.setX(handleRight->x()+handleWidth);
+        slider->setRect(QRect(leftPoint, rightPoint));
+
+        if ( item->x() < handleLeft->x()+sliderMinWidth)
+            handleLeft->setX(item->x()-sliderMinWidth);
+
+        double xmax = sliderBG->rect().bottomRight().x();
+
+        if (item->x() > xmax-handleWidth)
+            item->setX(xmax-1-handleWidth);
     }
-
-//    if (item == yearFrom ) {
-//        startPoint.setX(item->x()+60);
-//        yearFromHandle->setX(item->x());
-////        slider->setRect(QRect(startPoint, endPoint));
-//    }
-
-//    if (item == yearTo) {
-//        endPoint.setX(item->x()+60);
-//        yearToHandle->setX(item->x());
-//        slider->setRect(QRect(startPoint, endPoint));
-//    }
 
 }

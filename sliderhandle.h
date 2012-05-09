@@ -7,13 +7,14 @@
 class GraphWidget;
 class QGraphicsSceneMouseEvent;
 
-class SliderGrab : public QGraphicsObject
+class SliderHandle : public QGraphicsObject
 {
 public:
-    SliderGrab(GraphWidget *graphWidget, char *name);
+    SliderHandle(GraphWidget *graphWidget, char *name, double width, double height);
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void setMovable(bool movable);
     bool collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
     char *name;
 
@@ -25,11 +26,12 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    void setMovable(bool movable);
 
 private:
     GraphWidget *graph;
     qreal posY;
+    double width;
+    double height;
 };
 
 #endif // SLIDER_H
