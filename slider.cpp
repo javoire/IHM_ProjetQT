@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Slider::Slider(GraphWidget *graphWidget, char *name)
+Slider::Slider(GraphWidget *graphWidget, char *sliderName)
     : graph(graphWidget)
 {
     setFlag(ItemIsMovable);
@@ -16,7 +16,7 @@ Slider::Slider(GraphWidget *graphWidget, char *name)
     setCacheMode(DeviceCoordinateCache);
     setZValue(-1);
 
-    sliderName = name;
+    name = sliderName;
 }
 
 QRectF Slider::boundingRect() const
@@ -33,20 +33,9 @@ QPainterPath Slider::shape() const
     return path;
 }
 
-void detectCollision() {
-
-}
-
 bool Slider::collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode) const {
 
-
-    bool collision = QGraphicsItem::collidesWithItem(other, mode);
-
-    if(collision) {
-        cout << other->x() << endl;
-    }
-
-    return collision;
+    return QGraphicsItem::collidesWithItem(other, mode);
 
 }
 
@@ -54,9 +43,8 @@ QVariant Slider::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     switch (change) {
     case ItemPositionHasChanged:
-        graph->itemMoved();
+        graph->itemMoved(this);
         graph->detectCollisions(this);
-//        cout << sliderName << endl;
         break;
     default:
         break;
@@ -67,7 +55,7 @@ QVariant Slider::itemChange(GraphicsItemChange change, const QVariant &value)
 
 void Slider::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     update();
-//    this->setY(30);
+    cout << this->pos().y() << endl;
     QGraphicsItem::mousePressEvent(event);
 }
 
@@ -78,15 +66,15 @@ void Slider::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 
 void Slider::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     update();
-//    this->setY(30);
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void Slider::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-
-//    this->setY(30);
-
     painter->setPen(QPen(Qt::red, 0));
     painter->setBrush(Qt::red);
     painter->drawEllipse(30, 30, 60, 60);
+}
+
+void Slider::isDragged() {
+    cout << "dragged" << endl;
 }

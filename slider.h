@@ -2,11 +2,12 @@
 #define SLIDER_H
 
 #include <QGraphicsItem>
+#include <QGraphicsObject>
 
 class GraphWidget;
 class QGraphicsSceneMouseEvent;
 
-class Slider : public QGraphicsItem
+class Slider : public QGraphicsObject
 {
 public:
     Slider(GraphWidget *graphWidget, char *name);
@@ -14,17 +15,21 @@ public:
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     bool collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
-    char *sliderName;
+    char *name;
+
+public slots:
+    void isDragged();
 
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-//    void detectCollision(QGraphicsItem other);
+    void setMovable(bool movable);
 
 private:
     GraphWidget *graph;
+    qreal posY;
 };
 
 #endif // SLIDER_H
