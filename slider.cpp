@@ -66,6 +66,7 @@ void Slider::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 
 void Slider::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     update();
+    graph->itemReleased(this);
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
