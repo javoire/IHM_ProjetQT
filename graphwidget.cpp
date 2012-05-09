@@ -1,5 +1,5 @@
 #include "graphwidget.h"
-#include "slider.h"
+#include "slidergrab.h"
 #include "math.h"
 
 #include <iostream>
@@ -22,10 +22,10 @@ GraphWidget::GraphWidget(QWidget *parent) :
     setMinimumSize(600, 600);
     setWindowTitle(tr("Slider"));
 
-    yearFrom = new Slider(this, "yearFrom");
-    yearTo = new Slider(this, "yearTo");
-    yearFromHandle = new Slider(this, "yearFromHandle");
-    yearToHandle = new Slider(this, "yearToHandle");
+    yearFrom = new SliderGrab(this, "yearFrom");
+    yearTo = new SliderGrab(this, "yearTo");
+    yearFromHandle = new SliderGrab(this, "yearFromHandle");
+    yearToHandle = new SliderGrab(this, "yearToHandle");
 
 //    startPoint.setX(200);
 //    startPoint.setY(300);
@@ -54,7 +54,7 @@ GraphWidget::GraphWidget(QWidget *parent) :
 //    connect(yearFrom, zChanged(), )
 }
 
-void GraphWidget::detectCollisions(Slider *item) {
+void GraphWidget::detectCollisions(SliderGrab *item) {
 
     QList<QGraphicsItem*> allItems = this->items();
 
@@ -87,26 +87,37 @@ void GraphWidget::detectCollisions(Slider *item) {
     }
 }
 
-void GraphWidget::itemReleased(Slider *item) {
+void GraphWidget::itemReleased(SliderGrab *item) {
     if(item == yearFromHandle)
-        item->setY(50);
+        item->setY(100);
     if(item == yearToHandle)
-        item->setY(50);
+        item->setY(100);
 
 }
 
-void GraphWidget::itemMoved(Slider *item) {
+void GraphWidget::itemMoved(SliderGrab *item) {
     if (item == yearFromHandle) {
-        startPoint.setX(item->x());
         yearFrom->setX(item->x());
+//        startPoint.setX(item->x()+60);
+//        slider->setRect(QRect(startPoint, endPoint));
     }
+
     if (item == yearToHandle) {
-        endPoint.setX(item->x());
         yearTo->setX(item->x());
+//        endPoint.setX(item->x()+60);
+//        slider->setRect(QRect(startPoint, endPoint));
     }
-    if (item == yearFrom )
-        yearFromHandle->setX(item->x());
-    if (item == yearTo)
-        yearToHandle->setX(item->x());
+
+//    if (item == yearFrom ) {
+//        startPoint.setX(item->x()+60);
+//        yearFromHandle->setX(item->x());
+////        slider->setRect(QRect(startPoint, endPoint));
+//    }
+
+//    if (item == yearTo) {
+//        endPoint.setX(item->x()+60);
+//        yearToHandle->setX(item->x());
+//        slider->setRect(QRect(startPoint, endPoint));
+//    }
 
 }

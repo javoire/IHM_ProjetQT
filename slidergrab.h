@@ -7,10 +7,10 @@
 class GraphWidget;
 class QGraphicsSceneMouseEvent;
 
-class Slider : public QGraphicsObject
+class SliderGrab : public QGraphicsObject
 {
 public:
-    Slider(GraphWidget *graphWidget, char *name);
+    SliderGrab(GraphWidget *graphWidget, char *name);
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
