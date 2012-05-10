@@ -18,19 +18,23 @@ DoubleSliderWidget::DoubleSliderWidget(QWidget *parent, int width, int height, i
     valueLow = setValueLow;
     valueHigh = setValueHigh;
 
+    int margin = 0;
+
     setScene(scene);
     setCacheMode(CacheBackground);
     setViewportUpdateMode(BoundingRectViewportUpdate);
     setRenderHint(QPainter::Antialiasing);
     setTransformationAnchor(AnchorUnderMouse);
     scale(qreal(1), qreal(1));
-    setMinimumSize(width, height);
+//    setMinimumSize(width, height);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setWindowTitle(tr("Slider"));
-    setFixedSize(width, height);
+    setFixedSize(width+margin, height+margin);
 
-    setFrameStyle(2);
+    setContentsMargins(QMargins(margin, margin, margin, margin));
+    setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    setLineWidth(1);
     createYearSlider(width, height);
 
 }
@@ -51,7 +55,7 @@ void DoubleSliderWidget::createYearSlider(int width, int height) {
     rightPoint.setY(sliderPos.y()+sliderHeight);
 
     // create the elements
-    sliderBG = new QGraphicsRectItem(QRect(leftPoint, rightPoint));
+//    sliderBG = new QGraphicsRectItem(QRect(leftPoint, rightPoint));
     slider = new QGraphicsRectItem(QRect(leftPoint, rightPoint));
     handleLeft = new SliderHandle(this, "sliderLeft", handleWidth, sliderHeight);
     handleRight = new SliderHandle(this, "sliderRight", handleWidth, sliderHeight);
@@ -59,11 +63,12 @@ void DoubleSliderWidget::createYearSlider(int width, int height) {
     visibleHandleRight = new SliderHandle(this, "sliderRight", handleWidth, sliderHeight);
 
 //    sliderBG->setPen(Qt::NoPen);
-    sliderBG->setPen(QPen(QColor(100,100,100,255), 0));
-    slider->setPen(QPen(QColor(100,100,100,255), 0));
+//    sliderBG->setPen(QPen(QColor(100,100,100,255), 0));
+    slider->setPen(Qt::NoPen);
 
-    sliderBG->setBrush(QColor(230,230,230,255));
-    slider->setBrush(QColor(200,200,200,255));
+//    sliderBG->setBrush(QColor(230,230,230,255));
+    slider->setBrush(QColor(230,230,230,255));
+
     handleLeft->setBrush(QColor(255,255,255,0));
     handleRight->setBrush(QColor(255,255,255,0));
 
@@ -71,7 +76,7 @@ void DoubleSliderWidget::createYearSlider(int width, int height) {
     handleLeft->setZValue(5);
     visibleHandleLeft->setZValue(4);
     visibleHandleRight->setZValue(4);
-    sliderBG->setZValue(0);
+//    sliderBG->setZValue(0);
     slider->setZValue(1);
 
     visibleHandleLeft->setMovable(false);
@@ -87,7 +92,7 @@ void DoubleSliderWidget::createYearSlider(int width, int height) {
     visibleHandleRight->setPos(handleRight->pos());
 
     scene->addItem(slider);
-    scene->addItem(sliderBG);
+//    scene->addItem(sliderBG);
     scene->addItem(handleLeft);
     scene->addItem(handleRight);
     scene->addItem(visibleHandleLeft);
@@ -153,7 +158,7 @@ void DoubleSliderWidget::itemMoved(SliderHandle *item) {
         if ( item->x() > handleRight->x()-sliderMinWidth) // collide with and push other handle
             handleRight->setX(item->x()+sliderMinWidth);
 
-        double xmin = sliderBG->rect().topLeft().x(); // find left boundary
+        double xmin = 0; // left boundary
 
         if (item->x() < xmin) // don't exceed sliders boundaries
             item->setX(xmin);
@@ -170,7 +175,7 @@ void DoubleSliderWidget::itemMoved(SliderHandle *item) {
         if ( item->x() < handleLeft->x()+sliderMinWidth)
             handleLeft->setX(item->x()-sliderMinWidth);
 
-        double xmax = sliderBG->rect().bottomRight().x();
+        double xmax = this->width(); // right boundary
 
         if (item->x() > xmax-handleWidth)
             item->setX(xmax-1-handleWidth);

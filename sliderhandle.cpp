@@ -17,7 +17,10 @@ SliderHandle::SliderHandle(DoubleSliderWidget *sliderWidget, char *sliderName, d
     setZValue(-1);
 
     pen.setStyle(Qt::NoPen);
-    color.setRgbF(0.6,0.6,0.6,1);
+    color.setRgbF(0.8,0.8,0.8,1);
+
+    brush.setColor(color);
+    brush.setStyle(Qt::SolidPattern);
 
     width = setWidth;
     height = setHeight;
@@ -81,7 +84,8 @@ void SliderHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
 }
 
 void SliderHandle::setBrush(QColor setColor) {
-    color = setColor;
+//    color = setColor;
+    brush.setColor(setColor);
     update();
 }
 
@@ -92,6 +96,7 @@ void SliderHandle::setPen(QPen setPen) {
 
 void SliderHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     painter->setPen(pen);
-    painter->setBrush(color);
+//    painter->setBrush(color);
+    painter->setBrush(brush);
     painter->drawRect(0, 0, width, height+1);
 }

@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QGraphicsObject>
+#include <QLinearGradient>
 
 class DoubleSliderWidget;
 class QGraphicsSceneMouseEvent;
@@ -34,6 +35,7 @@ private:
     double height;
     QPen pen;
     QColor color;
+    QBrush brush;
 };
 
 #endif // SLIDER_H

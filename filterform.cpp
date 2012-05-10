@@ -13,7 +13,7 @@ FilterForm::FilterForm(QWidget *parent) :
     int yearMin = 1930;
     int yearMax = 2012;
 
-    doubleSlider = new DoubleSliderWidget(this, 201, 30, yearMin, yearMax);
+    doubleSlider = new DoubleSliderWidget(this, 201, 25, yearMin, yearMax);
 
     connect(doubleSlider, SIGNAL(valueLowChange(int)), this, SLOT(on_DoubleSlider_valueLowChanged(int)));
     connect(doubleSlider, SIGNAL(valueHighChange(int)), this, SLOT(on_DoubleSlider_valueHighChanged(int)));
