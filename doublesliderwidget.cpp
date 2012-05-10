@@ -1,4 +1,4 @@
-#include "graphwidget.h"
+#include "doublesliderwidget.h"
 #include "sliderhandle.h"
 #include "math.h"
 
@@ -8,12 +8,15 @@
 
 using namespace std;
 
-GraphWidget::GraphWidget(QWidget *parent) :
+DoubleSliderWidget::DoubleSliderWidget(QWidget *parent, int width, int height, int setValueLow, int setValueHigh) :
     QGraphicsView(parent)
 {
     scene = new QGraphicsScene(this);
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
-    scene->setSceneRect(0, 0, 500, 300);
+    scene->setSceneRect(0, 0, width, height);
+
+    valueLow = setValueLow;
+    valueHigh = setValueHigh;
 
     setScene(scene);
     setCacheMode(CacheBackground);
@@ -21,30 +24,27 @@ GraphWidget::GraphWidget(QWidget *parent) :
     setRenderHint(QPainter::Antialiasing);
     setTransformationAnchor(AnchorUnderMouse);
     scale(qreal(1), qreal(1));
-    setMinimumSize(500, 300);
+    setMinimumSize(width, height);
     setWindowTitle(tr("Slider"));
 
-    createYearSlider();
+    createYearSlider(width, height);
+//    getYears();
 
-//    controlsGroup = new QGroupBox("title");
-//    genre = new QCheckBox(tr("Genre"));
-
-//    QGridLayout *layout = new QGridLayout;
-
-//    layout->addWidget(genre);
-//    controlsGroup->setLayout(layout);
-
-//    scene->addWidget(genre);
 }
 
-void GraphWidget::createYearSlider() {
+void DoubleSliderWidget::getYears() {
+//    years->push_back(1960);
+
+}
+
+void DoubleSliderWidget::createYearSlider(int width, int height) {
     // global vars
-    sliderHeight = 30;
-    sliderWidth = 400;
+    sliderHeight = height;
+    sliderWidth = width;
     handleWidth = 50;
-    sliderMinWidth = 10 + handleWidth;
-    sliderPos.setX(40);
-    sliderPos.setY(100);
+    sliderMinWidth = 0 + handleWidth;
+    sliderPos.setX(0);
+    sliderPos.setY(0);
 
     // size of slider
     leftPoint.setX(sliderPos.x());
@@ -95,7 +95,7 @@ void GraphWidget::createYearSlider() {
     scene->addItem(visibleHandleRight);
 }
 
-void GraphWidget::detectCollisions(SliderHandle *item) {
+void DoubleSliderWidget::detectCollisions(SliderHandle *item) {
 
     //    QList<QGraphicsItem*> allItems = this->items();
 
@@ -128,7 +128,10 @@ void GraphWidget::detectCollisions(SliderHandle *item) {
     //    }
 }
 
-void GraphWidget::itemReleased(SliderHandle *item) {
+void DoubleSliderWidget::itemReleased(SliderHandle *item) {
+
+    /*  TODO: improve. the slider must return not only on release. it doesnt return on
+        release if the cursor leaves the window */
 
     // return the actual sliderhandle on top of the visual one on release
     if ( item == handleLeft)
@@ -137,20 +140,13 @@ void GraphWidget::itemReleased(SliderHandle *item) {
         item->setY(sliderPos.y());
 }
 
-void GraphWidget::updateLabels(SliderHandle *item) {
+void DoubleSliderWidget::updateLabels(SliderHandle *item) {
 
-//    QList<int> *years = new QList();
-//    years->append(1960);
-//    years->append(1965);
-//    years->append(1970);
-//    years->append(1975);
-//    years->append(1980);
-
-    // find pos of sliderhandle
+    // get position of handles in percent
     if ( item == handleLeft ) {
 
-        double pos = visibleHandleLeft->x() - sliderPos.x();
-        int posPercent = 100*(pos/(sliderWidth-handleWidth));
+        double pos = visibleHandleLeft->x();
+        int posPercent = 100*(pos/(sliderWidth-handleWidth*2));
 
         cout << posPercent << " %" << endl;
 
@@ -158,8 +154,8 @@ void GraphWidget::updateLabels(SliderHandle *item) {
 
     if ( item == handleRight ) {
 
-        double pos = visibleHandleRight->x() - sliderPos.x();
-        int posPercent = 100*(pos/(sliderWidth-handleWidth));
+        double pos = visibleHandleRight->x()-handleWidth;
+        int posPercent = 100*(pos/(sliderWidth-handleWidth*2));
 
         cout << posPercent << " %" << endl;
 
@@ -167,10 +163,14 @@ void GraphWidget::updateLabels(SliderHandle *item) {
 
 }
 
-void GraphWidget::itemMoved(SliderHandle *item) {
+void DoubleSliderWidget::itemMoved(SliderHandle *item) {
 
     /* "collision" behaviour of slider endpoints */
     if (item == handleLeft) {
+
+        // emit signal
+        int lowval = 1900;
+        emit valueLowChange(lowval);
 
         visibleHandleLeft->setX(handleLeft->x()); // move the visual handle with the real handle
 
@@ -187,6 +187,10 @@ void GraphWidget::itemMoved(SliderHandle *item) {
     }
 
     if (item == handleRight) {
+
+        // emit signal
+        int highval = 2012;
+        emit valueHighChange(highval);
 
         visibleHandleRight->setX(handleRight->x());
 

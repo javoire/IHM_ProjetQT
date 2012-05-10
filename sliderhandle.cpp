@@ -4,11 +4,11 @@
 #include <iostream>
 
 #include "sliderhandle.h"
-#include "graphwidget.h"
+#include "doublesliderwidget.h"
 
 using namespace std;
 
-SliderHandle::SliderHandle(GraphWidget *graphWidget, char *sliderName, double setWidth, double setHeight)
+SliderHandle::SliderHandle(DoubleSliderWidget *graphWidget, char *sliderName, double setWidth, double setHeight)
     : graph(graphWidget)
 {
     setFlag(ItemIsMovable);

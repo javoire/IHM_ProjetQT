@@ -4,13 +4,13 @@
 #include <QGraphicsItem>
 #include <QGraphicsObject>
 
-class GraphWidget;
+class DoubleSliderWidget;
 class QGraphicsSceneMouseEvent;
 
 class SliderHandle : public QGraphicsObject
 {
 public:
-    SliderHandle(GraphWidget *graphWidget, char *name, double width, double height);
+    SliderHandle(DoubleSliderWidget *graphWidget, char *name, double width, double height);
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -30,7 +30,7 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    GraphWidget *graph;
+    DoubleSliderWidget *graph;
     qreal posY;
     double width;
     double height;

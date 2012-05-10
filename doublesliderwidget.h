@@ -1,5 +1,5 @@
-#ifndef GRAPHWIDGET_H
-#define GRAPHWIDGET_H
+#ifndef DOUBLESLIDERWIDGET_H
+#define DOUBLESLIDERWIDGET_H
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -9,19 +9,22 @@
 #include <QGroupBox>
 #include "sliderhandle.h"
 
-class GraphWidget : public QGraphicsView
+class DoubleSliderWidget : public QGraphicsView
 {
     Q_OBJECT
 public:
-    explicit GraphWidget(QWidget *parent = 0);
+    explicit DoubleSliderWidget(QWidget *parent = 0, int width = 0, int height = 0, int setValueLow = 1900, int setValueHigh = 2012);
     void itemMoved(SliderHandle *item = 0);
     void detectCollisions(SliderHandle *item);
     void itemReleased(SliderHandle *item = 0);
     void updateLabels(SliderHandle *item = 0);
-    void createYearSlider();
+    void createYearSlider(int width, int height);
+    void getYears();
     
 signals:
-    
+    int valueHighChange(int highVal);
+    int valueLowChange(int lowVal);
+
 public slots:
 
 private:
@@ -44,7 +47,9 @@ private:
     QCheckBox *genre;
     QGroupBox *controlsGroup;
     QList<int> *years;
+    int valueLow;
+    int valueHigh;
 
 };
 
-#endif // GRAPHWIDGET_H
+#endif // DOUBLESLIDERWIDGET_H

@@ -10,23 +10,26 @@ FormTest::FormTest(QWidget *parent) :
     ui(new Ui::FormTest)
 {
 
-    graphWidget = new GraphWidget(this);
-//    QWidget *formWidget = new QWidget(this);
-//    QHBoxLayout *layout = new QHBoxLayout;
+    doubleSlider = new DoubleSliderWidget(this, 300, 20, 1930, 2012);
 
-//    layout->addWidget(graphWidget);
-//    layout->addWidget(formWidget);
+//    setCentralWidget(doubleSlider);
 
-//    setLayout(layout);
+    connect(doubleSlider, SIGNAL(valueLowChange(int)), this, SLOT(on_DoubleSlider_valueLowChanged(int)));
+    connect(doubleSlider, SIGNAL(valueHighChange(int)), this, SLOT(on_DoubleSlider_valueHighChanged(int)));
 
-    setCentralWidget(graphWidget);
-
-//    ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 FormTest::~FormTest()
 {
     delete ui;
+}
+
+void FormTest::on_DoubleSlider_valueLowChanged(int value) {
+    cout << value << endl;
+}
+void FormTest::on_DoubleSlider_valueHighChanged(int value) {
+    cout << value << endl;
 }
 
 void FormTest::on_yearFromSlider_valueChanged(int value) {
