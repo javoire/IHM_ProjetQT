@@ -17,6 +17,7 @@ public:
     void itemMoved(SliderHandle *item = 0);
     void detectCollisions(SliderHandle *item);
     void itemReleased(SliderHandle *item = 0);
+    void updateLabels(SliderHandle *item = 0);
     void createYearSlider();
     
 signals:
@@ -42,6 +43,8 @@ private:
     QLabel *maximumLabel;
     QCheckBox *genre;
     QGroupBox *controlsGroup;
+    QList<int> *years;
+
 };
 
 #endif // GRAPHWIDGET_H

@@ -16,6 +16,9 @@ SliderHandle::SliderHandle(GraphWidget *graphWidget, char *sliderName, double se
     setCacheMode(DeviceCoordinateCache);
     setZValue(-1);
 
+    pen.setStyle(Qt::NoPen);
+    color.setRgbF(0.6,0.6,0.6,1);
+
     width = setWidth;
     height = setHeight;
 
@@ -55,6 +58,7 @@ QVariant SliderHandle::itemChange(GraphicsItemChange change, const QVariant &val
     switch (change) {
     case ItemPositionHasChanged:
         graph->itemMoved(this);
+        graph->updateLabels(this);
         graph->detectCollisions(this);
         break;
     default:
@@ -81,10 +85,20 @@ void SliderHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//void SliderHandle::setPen(QPen pen){
+////    painter->setPen(pen);
+//    update();
+//}
+
+void SliderHandle::setBrush(QColor setColor) {
+    color = setColor;
+    update();
+}
+
 void SliderHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-    painter->setPen(QPen(Qt::red, 0));
-    painter->setBrush(Qt::red);
-    painter->drawRect(0, 0, width, height);
+    painter->setPen(pen);
+    painter->setBrush(color);
+    painter->drawRect(0, 0, width, height+1);
 }
 
 void SliderHandle::isDragged() {

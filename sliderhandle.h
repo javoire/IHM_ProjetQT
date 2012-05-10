@@ -14,6 +14,8 @@ public:
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void setPen(QPen pen);
+    void setBrush(QColor setColor);
     void setMovable(bool movable);
     bool collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
     char *name;
@@ -32,6 +34,8 @@ private:
     qreal posY;
     double width;
     double height;
+    QPen pen;
+    QColor color;
 };
 
 #endif // SLIDER_H

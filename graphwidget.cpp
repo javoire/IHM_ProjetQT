@@ -60,6 +60,21 @@ void GraphWidget::createYearSlider() {
     visibleHandleLeft = new SliderHandle(this, "sliderLeft", handleWidth, sliderHeight);
     visibleHandleRight = new SliderHandle(this, "sliderRight", handleWidth, sliderHeight);
 
+    sliderBG->setPen(Qt::NoPen);
+    slider->setPen(Qt::NoPen);
+
+    sliderBG->setBrush(QColor(230,230,230,255));
+    slider->setBrush(QColor(200,200,200,255));
+    handleLeft->setBrush(QColor(255,255,255,0));
+    handleRight->setBrush(QColor(255,255,255,0));
+
+    handleRight->setZValue(5);
+    handleLeft->setZValue(5);
+    visibleHandleLeft->setZValue(4);
+    visibleHandleRight->setZValue(4);
+    sliderBG->setZValue(0);
+    slider->setZValue(1);
+
     visibleHandleLeft->setMovable(false);
     visibleHandleRight->setMovable(false);
 
@@ -120,6 +135,36 @@ void GraphWidget::itemReleased(SliderHandle *item) {
         item->setY(sliderPos.y());
     if ( item == handleRight)
         item->setY(sliderPos.y());
+}
+
+void GraphWidget::updateLabels(SliderHandle *item) {
+
+//    QList<int> *years = new QList();
+//    years->append(1960);
+//    years->append(1965);
+//    years->append(1970);
+//    years->append(1975);
+//    years->append(1980);
+
+    // find pos of sliderhandle
+    if ( item == handleLeft ) {
+
+        double pos = visibleHandleLeft->x() - sliderPos.x();
+        int posPercent = 100*(pos/(sliderWidth-handleWidth));
+
+        cout << posPercent << " %" << endl;
+
+    }
+
+    if ( item == handleRight ) {
+
+        double pos = visibleHandleRight->x() - sliderPos.x();
+        int posPercent = 100*(pos/(sliderWidth-handleWidth));
+
+        cout << posPercent << " %" << endl;
+
+    }
+
 }
 
 void GraphWidget::itemMoved(SliderHandle *item) {
