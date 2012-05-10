@@ -10,7 +10,10 @@ FormTest::FormTest(QWidget *parent) :
     ui(new Ui::FormTest)
 {
 
-    doubleSlider = new DoubleSliderWidget(this, 219, 20, 1930, 2012);
+    int yearMin = 1930;
+    int yearMax = 2012;
+
+    doubleSlider = new DoubleSliderWidget(this, 219, 20, yearMin, yearMax);
 
 //    setCentralWidget(doubleSlider);
 
@@ -19,7 +22,10 @@ FormTest::FormTest(QWidget *parent) :
 
     ui->setupUi(this);
 
-    ui->doubleSliderLayout->addWidget(doubleSlider);
+    ui->yearSliderLayout->addWidget(doubleSlider);
+    ui->labelYearMin->setText(QString::number(yearMin));
+    ui->labelYearMax->setText(QString::number(yearMax));
+
 }
 
 FormTest::~FormTest()

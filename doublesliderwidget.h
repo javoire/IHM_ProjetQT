@@ -42,7 +42,6 @@ private:
     double sliderMinWidth;
     int valueLow;
     int valueHigh;
-
 };
 
 #endif // DOUBLESLIDERWIDGET_H
