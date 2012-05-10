@@ -25,15 +25,13 @@ DoubleSliderWidget::DoubleSliderWidget(QWidget *parent, int width, int height, i
     setTransformationAnchor(AnchorUnderMouse);
     scale(qreal(1), qreal(1));
     setMinimumSize(width, height);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setWindowTitle(tr("Slider"));
-
+    setFrameStyle(0);
+    setFixedSize(width, height);
     createYearSlider(width, height);
 //    getYears();
-
-}
-
-void DoubleSliderWidget::getYears() {
-//    years->push_back(1960);
 
 }
 
@@ -140,24 +138,35 @@ void DoubleSliderWidget::itemReleased(SliderHandle *item) {
         item->setY(sliderPos.y());
 }
 
-void DoubleSliderWidget::updateLabels(SliderHandle *item) {
+void DoubleSliderWidget::calcYearValues(SliderHandle *item) {
+
+    double pos = 0;
+    double posPercent = 0;
 
     // get position of handles in percent
     if ( item == handleLeft ) {
 
-        double pos = visibleHandleLeft->x();
-        int posPercent = 100*(pos/(sliderWidth-handleWidth*2));
+        pos = visibleHandleLeft->x();
+        posPercent = pos/(sliderWidth-handleWidth*2);
 
-        cout << posPercent << " %" << endl;
+//        cout << static_cast<int>(posPercent)*100 << " %" << endl;
+
+        // emit signal
+        int yearMin = valueLow + (valueHigh - valueLow)*posPercent;
+        emit valueLowChange(yearMin);
 
     }
 
     if ( item == handleRight ) {
 
-        double pos = visibleHandleRight->x()-handleWidth;
-        int posPercent = 100*(pos/(sliderWidth-handleWidth*2));
+        pos = visibleHandleRight->x()-handleWidth;
+        posPercent = (pos/(sliderWidth-handleWidth*2));
 
-        cout << posPercent << " %" << endl;
+//        cout << static_cast<int>(posPercent)*100 << " %" << endl;
+
+        // emit signal
+        int yearMax = valueLow + (valueHigh - valueLow)*posPercent;
+        emit valueHighChange(yearMax);
 
     }
 
@@ -167,10 +176,6 @@ void DoubleSliderWidget::itemMoved(SliderHandle *item) {
 
     /* "collision" behaviour of slider endpoints */
     if (item == handleLeft) {
-
-        // emit signal
-        int lowval = 1900;
-        emit valueLowChange(lowval);
 
         visibleHandleLeft->setX(handleLeft->x()); // move the visual handle with the real handle
 
@@ -184,13 +189,10 @@ void DoubleSliderWidget::itemMoved(SliderHandle *item) {
 
         if (item->x() < xmin) // don't exceed sliders boundaries
             item->setX(xmin);
+
     }
 
     if (item == handleRight) {
-
-        // emit signal
-        int highval = 2012;
-        emit valueHighChange(highval);
 
         visibleHandleRight->setX(handleRight->x());
 

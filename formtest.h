@@ -20,8 +20,6 @@ public:
     ~FormTest();
     
 private slots:
-    void on_yearFromSlider_valueChanged(int value);
-    void on_yearToSlider_valueChanged(int value);
     void on_DoubleSlider_valueLowChanged(int value);
     void on_DoubleSlider_valueHighChanged(int value);
 

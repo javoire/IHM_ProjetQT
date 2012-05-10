@@ -17,9 +17,8 @@ public:
     void itemMoved(SliderHandle *item = 0);
     void detectCollisions(SliderHandle *item);
     void itemReleased(SliderHandle *item = 0);
-    void updateLabels(SliderHandle *item = 0);
+    void calcYearValues(SliderHandle *item = 0);
     void createYearSlider(int width, int height);
-    void getYears();
     
 signals:
     int valueHighChange(int highVal);

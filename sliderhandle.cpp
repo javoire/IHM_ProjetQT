@@ -58,7 +58,7 @@ QVariant SliderHandle::itemChange(GraphicsItemChange change, const QVariant &val
     switch (change) {
     case ItemPositionHasChanged:
         graph->itemMoved(this);
-        graph->updateLabels(this);
+        graph->calcYearValues(this);
         graph->detectCollisions(this);
         break;
     default:
