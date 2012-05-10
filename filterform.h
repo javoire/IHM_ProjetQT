@@ -1,5 +1,5 @@
-#ifndef FORMTEST_H
-#define FORMTEST_H
+#ifndef FILTERFORM_H
+#define FILTERFORM_H
 
 #include <QMainWindow>
 #include <QWidget>
@@ -8,23 +8,23 @@
 #include <doublesliderwidget.h>.h>
 
 namespace Ui {
-class FormTest;
+class FilterForm;
 }
 
-class FormTest : public QMainWindow
+class FilterForm : public QMainWindow
 {
     Q_OBJECT
     
 public:
-    explicit FormTest(QWidget *parent = 0);
-    ~FormTest();
+    explicit FilterForm(QWidget *parent = 0);
+    ~FilterForm();
     
 private slots:
     void on_DoubleSlider_valueLowChanged(int value);
     void on_DoubleSlider_valueHighChanged(int value);
 
 private:
-    Ui::FormTest *ui;
+    Ui::FilterForm *ui;
     QSlider* yearToSlider;
     DoubleSliderWidget* doubleSlider;
 

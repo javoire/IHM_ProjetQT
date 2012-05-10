@@ -85,6 +85,11 @@ void SliderHandle::setBrush(QColor setColor) {
     update();
 }
 
+void SliderHandle::setPen(QPen setPen) {
+    pen = setPen;
+    update();
+}
+
 void SliderHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     painter->setPen(pen);
     painter->setBrush(color);

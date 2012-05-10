@@ -42,6 +42,7 @@ private:
     double sliderMinWidth;
     int valueLow;
     int valueHigh;
+    QList<double> filmsPerYear;
 };
 
 #endif // DOUBLESLIDERWIDGET_H
