@@ -4,6 +4,9 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
+#include <QLabel>
+#include <QCheckBox>
+#include <QGroupBox>
 #include "sliderhandle.h"
 
 class GraphWidget : public QGraphicsView
@@ -14,6 +17,7 @@ public:
     void itemMoved(SliderHandle *item = 0);
     void detectCollisions(SliderHandle *item);
     void itemReleased(SliderHandle *item = 0);
+    void createYearSlider();
     
 signals:
     
@@ -34,7 +38,10 @@ private:
     double sliderWidth;
     double handleWidth;
     double sliderMinWidth;
-
+    QLabel *minimumLabel;
+    QLabel *maximumLabel;
+    QCheckBox *genre;
+    QGroupBox *controlsGroup;
 };
 
 #endif // GRAPHWIDGET_H

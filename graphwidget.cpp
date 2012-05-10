@@ -3,15 +3,17 @@
 #include "math.h"
 
 #include <iostream>
+#include <QGridLayout>
+#include <QGroupBox>
 
 using namespace std;
 
 GraphWidget::GraphWidget(QWidget *parent) :
     QGraphicsView(parent)
 {
-    QGraphicsScene *scene = new QGraphicsScene(this);
+    scene = new QGraphicsScene(this);
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
-    scene->setSceneRect(0, 0, 600, 600);
+    scene->setSceneRect(0, 0, 500, 300);
 
     setScene(scene);
     setCacheMode(CacheBackground);
@@ -19,16 +21,30 @@ GraphWidget::GraphWidget(QWidget *parent) :
     setRenderHint(QPainter::Antialiasing);
     setTransformationAnchor(AnchorUnderMouse);
     scale(qreal(1), qreal(1));
-    setMinimumSize(600, 600);
+    setMinimumSize(500, 300);
     setWindowTitle(tr("Slider"));
 
+    createYearSlider();
+
+//    controlsGroup = new QGroupBox("title");
+//    genre = new QCheckBox(tr("Genre"));
+
+//    QGridLayout *layout = new QGridLayout;
+
+//    layout->addWidget(genre);
+//    controlsGroup->setLayout(layout);
+
+//    scene->addWidget(genre);
+}
+
+void GraphWidget::createYearSlider() {
     // global vars
     sliderHeight = 30;
     sliderWidth = 400;
     handleWidth = 50;
-    sliderMinWidth = 0 + 2 * handleWidth;
-    sliderPos.setX(100);
-    sliderPos.setY(200);
+    sliderMinWidth = 10 + handleWidth;
+    sliderPos.setX(40);
+    sliderPos.setY(100);
 
     // size of slider
     leftPoint.setX(sliderPos.x());
@@ -62,7 +78,6 @@ GraphWidget::GraphWidget(QWidget *parent) :
     scene->addItem(handleRight);
     scene->addItem(visibleHandleLeft);
     scene->addItem(visibleHandleRight);
-
 }
 
 void GraphWidget::detectCollisions(SliderHandle *item) {
@@ -99,6 +114,8 @@ void GraphWidget::detectCollisions(SliderHandle *item) {
 }
 
 void GraphWidget::itemReleased(SliderHandle *item) {
+
+    // return the actual sliderhandle on top of the visual one on release
     if ( item == handleLeft)
         item->setY(sliderPos.y());
     if ( item == handleRight)
@@ -107,6 +124,7 @@ void GraphWidget::itemReleased(SliderHandle *item) {
 
 void GraphWidget::itemMoved(SliderHandle *item) {
 
+    /* "collision" behaviour of slider endpoints */
     if (item == handleLeft) {
 
         visibleHandleLeft->setX(handleLeft->x()); // move the visual handle with the real handle
@@ -138,5 +156,7 @@ void GraphWidget::itemMoved(SliderHandle *item) {
         if (item->x() > xmax-handleWidth)
             item->setX(xmax-1-handleWidth);
     }
+
+    /* return year values */
 
 }

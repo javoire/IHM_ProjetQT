@@ -9,10 +9,16 @@ FormTest::FormTest(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FormTest)
 {
-//    yearToSlider = new QSlider(this);
-//    yearToSlider->setVisible(0);
 
     graphWidget = new GraphWidget(this);
+//    QWidget *formWidget = new QWidget(this);
+//    QHBoxLayout *layout = new QHBoxLayout;
+
+//    layout->addWidget(graphWidget);
+//    layout->addWidget(formWidget);
+
+//    setLayout(layout);
+
     setCentralWidget(graphWidget);
 
 //    ui->setupUi(this);
