@@ -11,8 +11,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        formtest.cpp
+        formtest.cpp \
+    graphwidget.cpp \
+    sliderhandle.cpp
 
-HEADERS  += formtest.h
+HEADERS  += formtest.h \
+    graphwidget.h \
+    sliderhandle.h
 
 FORMS    += formtest.ui
