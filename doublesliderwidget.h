@@ -15,7 +15,6 @@ class DoubleSliderWidget : public QGraphicsView
 public:
     explicit DoubleSliderWidget(QWidget *parent = 0, int width = 0, int height = 0, int setValueLow = 1900, int setValueHigh = 2012);
     void itemMoved(SliderHandle *item = 0);
-    void detectCollisions(SliderHandle *item);
     void itemReleased(SliderHandle *item = 0);
     void calcYearValues(SliderHandle *item = 0);
     void createYearSlider(int width, int height);
@@ -41,11 +40,6 @@ private:
     double sliderWidth;
     double handleWidth;
     double sliderMinWidth;
-    QLabel *minimumLabel;
-    QLabel *maximumLabel;
-    QCheckBox *genre;
-    QGroupBox *controlsGroup;
-    QList<int> *years;
     int valueLow;
     int valueHigh;
 

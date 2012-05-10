@@ -8,8 +8,8 @@
 
 using namespace std;
 
-SliderHandle::SliderHandle(DoubleSliderWidget *graphWidget, char *sliderName, double setWidth, double setHeight)
-    : graph(graphWidget)
+SliderHandle::SliderHandle(DoubleSliderWidget *sliderWidget, char *sliderName, double setWidth, double setHeight)
+    : doubleSlider(sliderWidget)
 {
     setFlag(ItemIsMovable);
     setFlag(ItemSendsGeometryChanges);
@@ -34,9 +34,6 @@ void SliderHandle::setMovable(bool movable) {
 
 QRectF SliderHandle::boundingRect() const
 {
-//    qreal strokeWidth = 2;
-//    return QRectF(30 - strokeWidth, 30 - strokeWidth,
-//                  60 + strokeWidth, 60 + strokeWidth);
     return QRect(0, 0, width, height);
 }
 
@@ -50,16 +47,14 @@ QPainterPath SliderHandle::shape() const
 bool SliderHandle::collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode) const {
 
     return QGraphicsItem::collidesWithItem(other, mode);
-
 }
 
 QVariant SliderHandle::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     switch (change) {
     case ItemPositionHasChanged:
-        graph->itemMoved(this);
-        graph->calcYearValues(this);
-        graph->detectCollisions(this);
+        doubleSlider->itemMoved(this);
+        doubleSlider->calcYearValues(this);
         break;
     default:
         break;
@@ -70,7 +65,7 @@ QVariant SliderHandle::itemChange(GraphicsItemChange change, const QVariant &val
 
 void SliderHandle::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     update();
-    cout << this->name << endl;
+//    cout << this->name << endl;
     QGraphicsItem::mousePressEvent(event);
 }
 
@@ -81,14 +76,9 @@ void SliderHandle::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 
 void SliderHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     update();
-    graph->itemReleased(this);
+    doubleSlider->itemReleased(this);
     QGraphicsItem::mouseReleaseEvent(event);
 }
-
-//void SliderHandle::setPen(QPen pen){
-////    painter->setPen(pen);
-//    update();
-//}
 
 void SliderHandle::setBrush(QColor setColor) {
     color = setColor;
@@ -99,8 +89,4 @@ void SliderHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->setPen(pen);
     painter->setBrush(color);
     painter->drawRect(0, 0, width, height+1);
-}
-
-void SliderHandle::isDragged() {
-    cout << "dragged" << endl;
 }

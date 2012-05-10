@@ -21,7 +21,6 @@ public:
     char *name;
 
 public slots:
-    void isDragged();
 
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
@@ -30,8 +29,7 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    DoubleSliderWidget *graph;
-    qreal posY;
+    DoubleSliderWidget *doubleSlider;
     double width;
     double height;
     QPen pen;

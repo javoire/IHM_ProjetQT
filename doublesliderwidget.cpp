@@ -93,42 +93,9 @@ void DoubleSliderWidget::createYearSlider(int width, int height) {
     scene->addItem(visibleHandleRight);
 }
 
-void DoubleSliderWidget::detectCollisions(SliderHandle *item) {
-
-    //    QList<QGraphicsItem*> allItems = this->items();
-
-    //    (QGraphicsObject*)item = item;
-
-    //    int i = 0;
-    //    for (i=0; i<allItems.count(); i++) {
-
-    //        QGraphicsItem* other = allItems[i];
-
-    //        if(item == yearTo || item == yearFrom) { // only collide these for now
-
-    //            if(item != other) { // skip itself
-    //                if(item->collidesWithItem(other)) {
-
-    //                    double dx = 1;
-    //                    double dy = 1;
-
-    //                    dx = item->x()-other->x();
-    //                    dy = item->y()-other->y();
-
-    //                    // distance to center of yearFrom?
-    //                    double dd = sqrt(pow(dx, 2) + pow(dy, 2));
-
-    //    //                other->moveBy(-dx/dd,-dy/dd); // calculate direction and repel other from item
-    //                    other->moveBy(-dx/dd,0); // calculate direction and repel other from item
-    //                }
-    //            }
-    //        }
-    //    }
-}
-
 void DoubleSliderWidget::itemReleased(SliderHandle *item) {
 
-    /*  TODO: improve. the slider must return not only on release. it doesnt return on
+    /*  TODO: improve. the sliderhandle must return to it's place not only on release. bug: it doesnt return on
         release if the cursor leaves the window */
 
     // return the actual sliderhandle on top of the visual one on release
