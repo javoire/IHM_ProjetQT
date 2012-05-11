@@ -282,9 +282,9 @@ border-color: rgb(107, 107, 107);</string>
   <widget class="Line" name="titleLine">
    <property name="geometry">
     <rect>
-     <x>760</x>
+     <x>750</x>
      <y>60</y>
-     <width>161</width>
+     <width>181</width>
      <height>21</height>
     </rect>
    </property>
@@ -311,7 +311,7 @@ border-color: rgb(107, 107, 107);</string>
     </font>
    </property>
    <property name="text">
-    <string>TheFilmCloud</string>
+    <string>TheFilmUniverse</string>
    </property>
    <property name="scaledContents">
     <bool>false</bool>
@@ -323,9 +323,9 @@ border-color: rgb(107, 107, 107);</string>
   <widget class="QLabel" name="descr">
    <property name="geometry">
     <rect>
-     <x>760</x>
+     <x>750</x>
      <y>80</y>
-     <width>161</width>
+     <width>181</width>
      <height>31</height>
     </rect>
    </property>

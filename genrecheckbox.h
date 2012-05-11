@@ -10,7 +10,7 @@ public:
     explicit genreCheckBox(QWidget *parent = 0);
     
 signals:
-    QString isChecked(QString name);
+    void isChecked(bool checked, QString name);
     
 public slots:
     void getsChecked(bool checked);

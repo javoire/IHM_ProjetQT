@@ -20,21 +20,24 @@ class FilterForm : public QMainWindow
     
 public:
     explicit FilterForm(QWidget *parent = 0);
-    void createGenreBoxes();
+    void placeGenreBoxes();
+    void importGenresFromList(QList<QString> genres);
     ~FilterForm();
+
+signals:
+    void chosenGenres(QList<QString> genres);
     
 public slots:
     void on_DoubleSlider_valueLowChanged(int value);
     void on_DoubleSlider_valueHighChanged(int value);
-    void checkToggled(bool checked);
+    void checkToggled(bool checked, QString name);
 
 private:
     Ui::FilterForm *ui;
     QSlider* yearToSlider;
     DoubleSliderWidget* doubleSlider;
     QLineEdit *titleInput;
-    QFont checkBoxFont;
-    QList<QCheckBox*> checkBoxes;
+    QList<QCheckBox*> genreCheckBoxes;
 
 };
 

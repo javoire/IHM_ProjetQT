@@ -11,8 +11,8 @@ genreCheckBox::genreCheckBox(QWidget *parent) :
 }
 
 void genreCheckBox::getsChecked(bool checked) {
-    if (checked) {
-        emit isChecked(this->objectName());
-        cout << this->objectName().toStdString() << endl;
-    }
+//    if (checked) {
+        emit isChecked(checked, this->objectName());
+//        cout << this->objectName().toStdString() << endl;
+//    }
 }

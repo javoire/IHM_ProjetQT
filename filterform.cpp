@@ -2,15 +2,26 @@
 #include "ui_filterform.h"
 #include "iostream"
 #include <QtGui>
+#include <QList>
 #include <genrecheckbox.h>
 
 using namespace std;
 
-FilterForm::FilterForm(QWidget *parent) :
+FilterForm::FilterForm(QWidget *parent) : // take a QList here with all the genres in it...
     QMainWindow(parent),
     ui(new Ui::FilterForm)
 {
     ui->setupUi(this);
+
+    // temp until QList is received form constructor...
+    QList<QString> genres;
+    genres.push_back(QString("drama"));
+    genres.push_back(QString("action"));
+    genres.push_back(QString("romance"));
+    genres.push_back(QString("thriller"));
+    genres.push_back(QString("adult"));
+
+    importGenresFromList(genres);
 
     int yearMin = 1930;
     int yearMax = 2012;
@@ -25,31 +36,50 @@ FilterForm::FilterForm(QWidget *parent) :
 
     ui->yearSliderLayout->addWidget(doubleSlider);
 
-    createGenreBoxes();
+    placeGenreBoxes();
 
 }
 
-void FilterForm::createGenreBoxes() {
-    // fonts
+void FilterForm::importGenresFromList(QList<QString> genres) {
+
+    QFont checkBoxFont;
     checkBoxFont.setFamily(QString::fromUtf8("Myriad Pro"));
     checkBoxFont.setPointSize(12);
 
-    genreCheckBox *checkBox = new genreCheckBox();
-    checkBox->setObjectName("cheeeeck");
+    // create a checkbox item for each genre
+    for (int i=0; i < genres.size(); i++) {
 
-//    checkBoxes.append(new QCheckBox());
+        QString genre = genres.at(i);
 
-//    checkBox->setObjectName(QString::fromUtf8("checkBox2"));
-//    checkBox->setText("Check2");
-//    checkBox->setFont(checkBoxFont);
+        genreCheckBox *genreBox = new genreCheckBox();
+        genreBox->setFont(checkBoxFont);
+        genreBox->setObjectName(genre);
+        genreBox->setText(genre);
+        connect(genreBox, SIGNAL(isChecked(bool,QString)), this, SLOT(checkToggled(bool, QString)));
 
-    connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(checkToggled(bool)));
-
-    ui->checkBoxesLeft->addWidget(checkBox);
+        genreCheckBoxes.append(genreBox);
+    }
 }
 
-void FilterForm::checkToggled(bool checked) {
+void FilterForm::placeGenreBoxes() {
+
+//    connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(checkToggled(bool)));
+
+    // place the checkboxes on UI
+    int i;
+    for (i = 0; i < genreCheckBoxes.size()/2; i++) { // put half here
+        ui->checkBoxesLeft->addWidget(genreCheckBoxes.at(i));
+    }
+
+    for (int j = i; j < genreCheckBoxes.size(); j++) { // put half here
+        ui->checkBoxesRight->addWidget(genreCheckBoxes.at(j));
+    }
+
+}
+
+void FilterForm::checkToggled(bool checked, QString name) {
     cout << checked << endl;
+    cout << name.toStdString() << endl;
 }
 
 FilterForm::~FilterForm()
