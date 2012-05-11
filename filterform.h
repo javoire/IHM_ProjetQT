@@ -33,8 +33,8 @@ signals:
     void searchButtonClicked();
     
 public slots:
-    void on_DoubleSlider_valueLowChanged(int value);
-    void on_DoubleSlider_valueHighChanged(int value);
+    void DoubleSlider_valueLowChanged(int value);
+    void DoubleSlider_valueHighChanged(int value);
     void checkToggled(bool checked, QString name);
 
 private slots:

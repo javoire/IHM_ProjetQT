@@ -44,8 +44,8 @@ void FilterForm::placeYearSlider(int yearMin, int yearMax) {
 
     doubleSlider = new DoubleSliderWidget(this, 201, 25, yearMin, yearMax);
 
-    connect(doubleSlider, SIGNAL(valueLowChange(int)), this, SLOT(on_DoubleSlider_valueLowChanged(int)));
-    connect(doubleSlider, SIGNAL(valueHighChange(int)), this, SLOT(on_DoubleSlider_valueHighChanged(int)));
+    connect(doubleSlider, SIGNAL(valueLowChange(int)), this, SLOT(DoubleSlider_valueLowChanged(int)));
+    connect(doubleSlider, SIGNAL(valueHighChange(int)), this, SLOT(DoubleSlider_valueHighChanged(int)));
 
     ui->labelYearMin->setText(QString::number(yearMin));
     ui->labelYearMax->setText(QString::number(yearMax));
@@ -116,13 +116,13 @@ FilterForm::~FilterForm()
     delete ui;
 }
 
-void FilterForm::on_DoubleSlider_valueLowChanged(int value) {
+void FilterForm::DoubleSlider_valueLowChanged(int value) {
 //    cout << value << endl;
     ui->labelYearMin->setText(QString::number(value));
 
     emit yearMinChanged(value);
 }
-void FilterForm::on_DoubleSlider_valueHighChanged(int value) {
+void FilterForm::DoubleSlider_valueHighChanged(int value) {
 //    cout << value << endl;
     ui->labelYearMax->setText(QString::number(value));
 
