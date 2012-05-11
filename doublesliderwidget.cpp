@@ -105,10 +105,14 @@ void DoubleSliderWidget::itemReleased(SliderHandle *item) {
         release if the cursor leaves the window */
 
     // return the actual sliderhandle on top of the visual one on release
-    if ( item == handleLeft)
+    if ( item == handleLeft) {
         item->setY(sliderPos.y());
-    if ( item == handleRight)
+        emit yearLowSetByUser(yearMin);
+    }
+    if ( item == handleRight) {
         item->setY(sliderPos.y());
+        emit yearHighSetByUser(yearMax);
+    }
 }
 
 void DoubleSliderWidget::calcYearValues(SliderHandle *item) {
@@ -125,8 +129,8 @@ void DoubleSliderWidget::calcYearValues(SliderHandle *item) {
 //        cout << static_cast<int>(posPercent)*100 << " %" << endl;
 
         // emit signal
-        int yearMin = valueLow + (valueHigh - valueLow)*posPercent;
-        emit valueLowChange(yearMin);
+        yearMin = valueLow + (valueHigh - valueLow)*posPercent;
+        emit yearMinChange(yearMin);
 
     }
 
@@ -138,8 +142,8 @@ void DoubleSliderWidget::calcYearValues(SliderHandle *item) {
 //        cout << static_cast<int>(posPercent)*100 << " %" << endl;
 
         // emit signal
-        int yearMax = valueLow + (valueHigh - valueLow)*posPercent;
-        emit valueHighChange(yearMax);
+        yearMax = valueLow + (valueHigh - valueLow)*posPercent;
+        emit yearMaxChange(yearMax);
 
     }
 

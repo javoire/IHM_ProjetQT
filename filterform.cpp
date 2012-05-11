@@ -53,11 +53,12 @@ FilterForm::FilterForm(QWidget *parent) : // take a QList here with all the genr
 
 void FilterForm::placeYearSlider(int yearMin, int yearMax) {
 
-
     doubleSlider = new DoubleSliderWidget(this, 201, 25, yearMin, yearMax);
 
-    connect(doubleSlider, SIGNAL(valueLowChange(int)), this, SLOT(DoubleSlider_valueLowChanged(int)));
-    connect(doubleSlider, SIGNAL(valueHighChange(int)), this, SLOT(DoubleSlider_valueHighChanged(int)));
+    connect(doubleSlider, SIGNAL(yearMinChange(int)), this, SLOT(DoubleSlider_yearMinChanged(int)));
+    connect(doubleSlider, SIGNAL(yearMaxChange(int)), this, SLOT(DoubleSlider_yearMaxChanged(int)));
+    connect(doubleSlider, SIGNAL(yearLowSetByUser(int)), this, SLOT(DoubleSlider_yearMinSetByUser(int)));
+    connect(doubleSlider, SIGNAL(yearHighSetByUser(int)), this, SLOT(DoubleSlider_yearMaxSetByUser(int)));
 
     ui->labelYearMin->setText(QString::number(yearMin));
     ui->labelYearMax->setText(QString::number(yearMax));
@@ -110,26 +111,10 @@ bool FilterForm::placeGenreBoxes() {
     return true;
 }
 
-void FilterForm::checkToggled(bool checked, QString name) {
+void FilterForm::checkToggled(bool isChecked, QString name) {
 
-    if (checked) { // add genre
-        chosenGenresList.append(name);
-    } else if (!checked) { // remove genre
-        int indexToRemove = chosenGenresList.indexOf(name);
-
-        if(!name.isNull())
-            chosenGenresList.removeAt(indexToRemove);
-    }
-
-    string genres = "";
-    for (int i = 0; i < chosenGenresList.size(); i++) {
-
-        genres = genres + chosenGenresList.at(i).toStdString() + " ";
-
-    }
-    cout << "current chosen genres: " << genres << endl;
-
-    emit chosenGenres(chosenGenresList);
+    cout << isChecked << " " << name.toStdString() << endl;
+    emit genreIsClicked(isChecked, name);
 }
 
 FilterForm::~FilterForm()
@@ -137,17 +122,24 @@ FilterForm::~FilterForm()
     delete ui;
 }
 
-void FilterForm::DoubleSlider_valueLowChanged(int value) {
+// these two are called only when the user releases the mouse: has chosen a year
+void FilterForm::DoubleSlider_yearMinSetByUser(int value) {
+    emit yearMinChanged(value);
+    cout << value << endl;
+}
+void FilterForm::DoubleSlider_yearMaxSetByUser(int value) {
+    emit yearMaxChanged(value);
+    cout << value << endl;
+}
+
+// these two updates the labels in real time
+void FilterForm::DoubleSlider_yearMinChanged(int value) {
 //    cout << value << endl;
     ui->labelYearMin->setText(QString::number(value));
-
-    emit yearMinChanged(value);
 }
-void FilterForm::DoubleSlider_valueHighChanged(int value) {
+void FilterForm::DoubleSlider_yearMaxChanged(int value) {
 //    cout << value << endl;
     ui->labelYearMax->setText(QString::number(value));
-
-    emit yearMaxChanged(value);
 }
 
 void FilterForm::on_titleInput_textChanged(const QString &arg1)

@@ -20,8 +20,10 @@ public:
     void createYearSlider(int width, int height);
     
 signals:
-    int valueHighChange(int highVal);
-    int valueLowChange(int lowVal);
+    int yearMaxChange(int highVal);
+    int yearMinChange(int lowVal);
+    int yearHighSetByUser(int highVal);
+    int yearLowSetByUser(int lowVal);
 
 public slots:
 
@@ -42,7 +44,9 @@ private:
     double sliderMinWidth;
     int valueLow;
     int valueHigh;
-    QList<double> filmsPerYear;
+    int yearMin;
+    int yearMax;
+//    QList<double> filmsPerYear;
 };
 
 #endif // DOUBLESLIDERWIDGET_H

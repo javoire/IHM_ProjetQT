@@ -26,15 +26,17 @@ public:
     ~FilterForm();
 
 signals:
-    void chosenGenres(QList<QString> genres);
+    void genreIsClicked(bool checked, QString name);
     void yearMinChanged(int yearMin);
     void yearMaxChanged(int yearMax);
     void titleChanged(QString title);
     void searchButtonClicked();
     
 public slots:
-    void DoubleSlider_valueLowChanged(int value);
-    void DoubleSlider_valueHighChanged(int value);
+    void DoubleSlider_yearMinChanged(int value);
+    void DoubleSlider_yearMaxChanged(int value);
+    void DoubleSlider_yearMinSetByUser(int value);
+    void DoubleSlider_yearMaxSetByUser(int value);
     void checkToggled(bool checked, QString name);
 
 private slots:
@@ -48,7 +50,6 @@ private:
     DoubleSliderWidget* doubleSlider;
     QLineEdit *titleInput;
     QList<QCheckBox*> genreCheckBoxes;
-    QList<QString> chosenGenresList;
 
 };
 
