@@ -69,13 +69,13 @@ void DoubleSliderWidget::createYearSlider(int width, int height) {
 //    sliderBG->setBrush(QColor(230,230,230,255));
     slider->setBrush(QColor(230,230,230,255));
 
-    handleLeft->setBrush(QColor(255,255,255,0));
-    handleRight->setBrush(QColor(255,255,255,0));
+    handleLeft->setBrush(QColor(255,0,0,255));
+    handleRight->setBrush(QColor(255,0,0,255));
 
     handleRight->setZValue(5);
     handleLeft->setZValue(5);
-    visibleHandleLeft->setZValue(4);
-    visibleHandleRight->setZValue(4);
+    visibleHandleLeft->setZValue(2);
+    visibleHandleRight->setZValue(2);
 //    sliderBG->setZValue(0);
     slider->setZValue(1);
 
@@ -97,6 +97,8 @@ void DoubleSliderWidget::createYearSlider(int width, int height) {
     scene->addItem(handleRight);
     scene->addItem(visibleHandleLeft);
     scene->addItem(visibleHandleRight);
+
+//    connect(handleLeft, SIGNAL(xChanged()), this, SLOT(setSliderPos()));
 }
 
 void DoubleSliderWidget::itemReleased(SliderHandle *item) {
@@ -106,11 +108,13 @@ void DoubleSliderWidget::itemReleased(SliderHandle *item) {
 
     // return the actual sliderhandle on top of the visual one on release
     if ( item == handleLeft) {
-        item->setY(sliderPos.y());
+        item->setY(visibleHandleLeft->y());
+        item->setX(visibleHandleLeft->x());
         emit yearLowSetByUser(yearMin);
     }
     if ( item == handleRight) {
-        item->setY(sliderPos.y());
+        item->setY(visibleHandleRight->y());
+        item->setX(visibleHandleRight->x());
         emit yearHighSetByUser(yearMax);
     }
 }
@@ -151,40 +155,55 @@ void DoubleSliderWidget::calcYearValues(SliderHandle *item) {
 
 void DoubleSliderWidget::itemMoved(SliderHandle *item) {
 
+    visibleHandleLeft->setX(handleLeft->x()); // move the visual handle with the real handle
+    visibleHandleRight->setX(handleRight->x()+1);
+
+    double xmin = 0; // left boundary
+    double xmax = this->width(); // right boundary
+
+
+    if (visibleHandleLeft->x() < xmin) // don't exceed sliders boundaries
+        visibleHandleLeft->setX(xmin);
+
+    if (visibleHandleRight->x() > xmax-handleWidth)
+        visibleHandleRight->setX(xmax-1-handleWidth);
+
+
     /* "collision" behaviour of slider endpoints */
-    if (item == handleLeft) {
+//    if (item == handleLeft) {
 
-        visibleHandleLeft->setX(handleLeft->x()); // move the visual handle with the real handle
 
-        leftPoint.setX(handleLeft->x()); // adjust slider size with handle movement
-        slider->setRect(QRect(leftPoint, rightPoint));
-
-        if ( item->x() > handleRight->x()-sliderMinWidth) // collide with and push other handle
-            handleRight->setX(item->x()+sliderMinWidth);
-
-        double xmin = 0; // left boundary
-
-        if (item->x() < xmin) // don't exceed sliders boundaries
-            item->setX(xmin);
-
-    }
-
-    if (item == handleRight) {
-
-        visibleHandleRight->setX(handleRight->x()+1);
-
-        rightPoint.setX(handleRight->x()+handleWidth);
-        slider->setRect(QRect(leftPoint, rightPoint));
-
-        if ( item->x() < handleLeft->x()+sliderMinWidth)
-            handleLeft->setX(item->x()-sliderMinWidth);
-
-        double xmax = this->width(); // right boundary
-
-        if (item->x() > xmax-handleWidth)
-            item->setX(xmax-1-handleWidth);
-    }
-
-    /* return year values */
+//        cout << visibleHandleLeft->x() << endl;
+//        cout << handleLeft->x() << endl;
+//
+//        double xmin = 0; // left boundary
+//        double xmax = this->width(); // right boundary
+//
+//        if (handleLeft->x() < xmin) // don't exceed sliders boundaries
+//            handleLeft->setX(xmin);
+//
+//        if (handleRight->x() > xmax-handleWidth)
+//            handleRight->setX(xmax-1-handleWidth);
+////        if (handleRight->x() < xmin+handleWidth);
+////            handleRight->setX(xmin-1-handleWidth);
+//
+////    }
+//
+////    if (item == handleRight) {
+//
+//        if ( handleRight->x() < handleLeft->x()+sliderMinWidth)
+//            handleLeft->setX(handleRight->x()-sliderMinWidth);
+//        else if ( handleLeft->x() > handleRight->x()-sliderMinWidth) // collide with and push other handle
+//            handleRight->setX(handleLeft->x()+sliderMinWidth);
+//
+//
+//        leftPoint.setX(handleLeft->x()); // adjust slider size with handle movement
+//        slider->setRect(QRect(leftPoint, rightPoint));
+//
+//        rightPoint.setX(handleRight->x()+handleWidth);
+//        slider->setRect(QRect(leftPoint, rightPoint));
+////    }
+//
+//
 
 }

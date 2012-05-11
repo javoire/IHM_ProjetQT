@@ -74,7 +74,7 @@ bool FilterForm::createGenreCheckBoxes(QList<QString> genres) {
 
     QFont checkBoxFont;
     checkBoxFont.setFamily(QString::fromUtf8("Myriad Pro"));
-    checkBoxFont.setPointSize(12);
+    checkBoxFont.setPointSize(7);
 
     // create a checkbox item for each genre
     for (int i=0; i < genres.size(); i++) {

@@ -25,7 +25,8 @@ signals:
     int yearHighSetByUser(int highVal);
     int yearLowSetByUser(int lowVal);
 
-public slots:
+//public slots:
+//    void setSliderPos();
 
 private:
     QGraphicsScene *scene;

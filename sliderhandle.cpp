@@ -57,6 +57,8 @@ QVariant SliderHandle::itemChange(GraphicsItemChange change, const QVariant &val
     switch (change) {
     case ItemPositionHasChanged:
         doubleSlider->itemMoved(this);
+//        cout << this->name << endl;
+//        cout << this->x() << endl;
         doubleSlider->calcYearValues(this);
         break;
     default:
