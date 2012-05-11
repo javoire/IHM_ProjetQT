@@ -3,11 +3,13 @@
 #include "filmdummy.h"
 #include <QString>
 
-FilmDisplay::FilmDisplay(QWidget *parent, FilmDummy *film) :
-    QWidget(parent),
+FilmDisplay::FilmDisplay(QFrame *parent, FilmDummy *film) :
+    QFrame(parent),
     ui(new Ui::FilmDisplay)
 {
     ui->setupUi(this);
+
+    parent1 = parent;
 
     FilmDummy *film1 = new FilmDummy();
 
@@ -21,4 +23,9 @@ FilmDisplay::FilmDisplay(QWidget *parent, FilmDummy *film) :
 FilmDisplay::~FilmDisplay()
 {
     delete ui;
+}
+
+void FilmDisplay::on_buttonClose_released()
+{
+    parent1->close();
 }

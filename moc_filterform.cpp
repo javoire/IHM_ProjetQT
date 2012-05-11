@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'filterform.h'
 **
-** Created: Fri May 11 21:23:43 2012
+** Created: Fri May 11 21:56:49 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_FilterForm[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -43,8 +43,9 @@ static const uint qt_meta_data_FilterForm[] = {
      232,  160,   11,   11, 0x0a,
      267,  160,   11,   11, 0x0a,
      302,   12,   11,   11, 0x0a,
-     334,  329,   11,   11, 0x08,
-     369,   11,   11,   11, 0x08,
+     329,   11,   11,   11, 0x08,
+     360,  355,   11,   11, 0x08,
+     395,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -59,7 +60,8 @@ static const char qt_meta_stringdata_FilterForm[] = {
     "DoubleSlider_yearMaxChanged(int)\0"
     "DoubleSlider_yearMinSetByUser(int)\0"
     "DoubleSlider_yearMaxSetByUser(int)\0"
-    "checkToggled(bool,QString)\0arg1\0"
+    "checkToggled(bool,QString)\0"
+    "on_buttonPopup_released()\0arg1\0"
     "on_titleInput_textChanged(QString)\0"
     "on_Search_released()\0"
 };
@@ -103,11 +105,12 @@ int FilterForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 7: DoubleSlider_yearMinSetByUser((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 8: DoubleSlider_yearMaxSetByUser((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 9: checkToggled((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 10: on_titleInput_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 11: on_Search_released(); break;
+        case 10: on_buttonPopup_released(); break;
+        case 11: on_titleInput_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 12: on_Search_released(); break;
         default: ;
         }
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

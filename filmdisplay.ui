@@ -155,7 +155,7 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="buttonClose">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -170,22 +170,5 @@
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>released()</signal>
-   <receiver>FilmDisplay</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>268</x>
-     <y>194</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>289</x>
-     <y>14</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -3,7 +3,8 @@
 #include "iostream"
 #include <QtGui>
 #include <QList>
-#include <genrecheckbox.h>
+#include "genrecheckbox.h"
+#include "filmdisplay.h"
 
 using namespace std;
 
@@ -152,4 +153,22 @@ void FilterForm::on_Search_released()
 {
     cout << "search clicked" << endl;
     emit searchButtonClicked();
+}
+
+void FilterForm::on_buttonPopup_released()
+{
+    cout << "clicked" << endl;
+
+    QFrame* popup = new QFrame(this, Qt::Popup | Qt::Window);
+    popup->resize(560,220);
+    popup->setFrameStyle(6);
+
+
+    FilmDisplay *fmd = new FilmDisplay(popup);
+
+//    connect(fmd->ui->, SIGNAL(released()), popup, SLOT(close()));
+
+    popup->show();
+
+
 }
