@@ -11,12 +11,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        formtest.cpp \
-    graphwidget.cpp \
-    sliderhandle.cpp
+    sliderhandle.cpp \
+    doublesliderwidget.cpp \
+    filterform.cpp \
+    genrecheckbox.cpp
 
-HEADERS  += formtest.h \
-    graphwidget.h \
-    sliderhandle.h
+HEADERS  += \
+    sliderhandle.h \
+    doublesliderwidget.h \
+    filterform.h \
+    genrecheckbox.h
 
-FORMS    += formtest.ui
+FORMS    += \
+    filterform.ui

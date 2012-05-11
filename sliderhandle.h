@@ -3,23 +3,25 @@
 
 #include <QGraphicsItem>
 #include <QGraphicsObject>
+#include <QLinearGradient>
 
-class GraphWidget;
+class DoubleSliderWidget;
 class QGraphicsSceneMouseEvent;
 
 class SliderHandle : public QGraphicsObject
 {
 public:
-    SliderHandle(GraphWidget *graphWidget, char *name, double width, double height);
+    SliderHandle(DoubleSliderWidget *graphWidget, char *name, double width, double height);
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void setPen(QPen pen);
+    void setBrush(QColor setColor);
     void setMovable(bool movable);
     bool collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
     char *name;
 
 public slots:
-    void isDragged();
 
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
@@ -28,10 +30,12 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    GraphWidget *graph;
-    qreal posY;
+    DoubleSliderWidget *doubleSlider;
     double width;
     double height;
+    QPen pen;
+    QColor color;
+    QBrush brush;
 };
 
 #endif // SLIDER_H

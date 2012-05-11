@@ -1,10 +1,10 @@
 #include <QtGui/QApplication>
-#include "formtest.h"
+#include "filterform.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    FormTest w;
+    FilterForm w;
     w.show();
     
     return a.exec();

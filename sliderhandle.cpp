@@ -4,17 +4,23 @@
 #include <iostream>
 
 #include "sliderhandle.h"
-#include "graphwidget.h"
+#include "doublesliderwidget.h"
 
 using namespace std;
 
-SliderHandle::SliderHandle(GraphWidget *graphWidget, char *sliderName, double setWidth, double setHeight)
-    : graph(graphWidget)
+SliderHandle::SliderHandle(DoubleSliderWidget *sliderWidget, char *sliderName, double setWidth, double setHeight)
+    : doubleSlider(sliderWidget)
 {
     setFlag(ItemIsMovable);
     setFlag(ItemSendsGeometryChanges);
     setCacheMode(DeviceCoordinateCache);
     setZValue(-1);
+
+    pen.setStyle(Qt::NoPen);
+    color.setRgbF(0.8,0.8,0.8,1);
+
+    brush.setColor(color);
+    brush.setStyle(Qt::SolidPattern);
 
     width = setWidth;
     height = setHeight;
@@ -31,9 +37,6 @@ void SliderHandle::setMovable(bool movable) {
 
 QRectF SliderHandle::boundingRect() const
 {
-//    qreal strokeWidth = 2;
-//    return QRectF(30 - strokeWidth, 30 - strokeWidth,
-//                  60 + strokeWidth, 60 + strokeWidth);
     return QRect(0, 0, width, height);
 }
 
@@ -47,15 +50,14 @@ QPainterPath SliderHandle::shape() const
 bool SliderHandle::collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode) const {
 
     return QGraphicsItem::collidesWithItem(other, mode);
-
 }
 
 QVariant SliderHandle::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     switch (change) {
     case ItemPositionHasChanged:
-        graph->itemMoved(this);
-        graph->detectCollisions(this);
+        doubleSlider->itemMoved(this);
+        doubleSlider->calcYearValues(this);
         break;
     default:
         break;
@@ -66,7 +68,7 @@ QVariant SliderHandle::itemChange(GraphicsItemChange change, const QVariant &val
 
 void SliderHandle::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     update();
-    cout << this->name << endl;
+//    cout << this->name << endl;
     QGraphicsItem::mousePressEvent(event);
 }
 
@@ -77,16 +79,24 @@ void SliderHandle::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 
 void SliderHandle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     update();
-    graph->itemReleased(this);
+    doubleSlider->itemReleased(this);
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void SliderHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-    painter->setPen(QPen(Qt::red, 0));
-    painter->setBrush(Qt::red);
-    painter->drawRect(0, 0, width, height);
+void SliderHandle::setBrush(QColor setColor) {
+//    color = setColor;
+    brush.setColor(setColor);
+    update();
 }
 
-void SliderHandle::isDragged() {
-    cout << "dragged" << endl;
+void SliderHandle::setPen(QPen setPen) {
+    pen = setPen;
+    update();
+}
+
+void SliderHandle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+    painter->setPen(pen);
+//    painter->setBrush(color);
+    painter->setBrush(brush);
+    painter->drawRect(0, 0, width, height+1);
 }
