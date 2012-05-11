@@ -24,6 +24,9 @@ FilterForm::FilterForm(QWidget *parent) : // take a QList here with all the genr
     genres.push_back(QString("Adventure"));
     genres.push_back(QString("Mystery"));
     genres.push_back(QString("Horror"));
+    genres.push_back(QString("Documentary"));
+    genres.push_back(QString("Comedy"));
+    genres.push_back(QString("Biography"));
 
     // temp. these should come from constructor also
     int yearMin = 1930;
