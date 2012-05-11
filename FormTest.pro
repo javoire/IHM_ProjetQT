@@ -14,13 +14,18 @@ SOURCES += main.cpp\
     sliderhandle.cpp \
     doublesliderwidget.cpp \
     filterform.cpp \
-    genrecheckbox.cpp
+    genrecheckbox.cpp \
+    filmdummy.cpp \
+    filmdisplay.cpp
 
 HEADERS  += \
     sliderhandle.h \
     doublesliderwidget.h \
     filterform.h \
-    genrecheckbox.h
+    genrecheckbox.h \
+    filmdummy.h \
+    filmdisplay.h
 
 FORMS    += \
-    filterform.ui
+    filterform.ui \
+    filmdisplay.ui
