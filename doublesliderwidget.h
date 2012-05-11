@@ -25,9 +25,6 @@ signals:
     int yearHighSetByUser(int highVal);
     int yearLowSetByUser(int lowVal);
 
-//public slots:
-//    void setSliderPos();
-
 private:
     QGraphicsScene *scene;
     QGraphicsRectItem *slider;
@@ -47,7 +44,6 @@ private:
     int valueHigh;
     int yearMin;
     int yearMax;
-//    QList<double> filmsPerYear;
 };
 
 #endif // DOUBLESLIDERWIDGET_H
