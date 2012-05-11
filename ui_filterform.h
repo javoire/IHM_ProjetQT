@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'filterform.ui'
 **
-** Created: Fri May 11 21:23:37 2012
+** Created: Fri May 11 21:56:46 2012
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -55,6 +55,7 @@ public:
     QTextBrowser *textBrowser;
     QLabel *titleLabel;
     QFrame *line_3;
+    QPushButton *buttonPopup;
 
     void setupUi(QWidget *FilterForm)
     {
@@ -201,17 +202,6 @@ public:
 "background-color: rgb(252, 252, 252, 0);\n"
 "border-color: rgb(107, 107, 107);"));
         titleInput->setFrame(false);
-        layoutWidget->raise();
-        layoutWidget->raise();
-        line->raise();
-        line_2->raise();
-        layoutWidget->raise();
-        layoutWidget_2->raise();
-        Search->raise();
-        frame->raise();
-        labelYearMin->raise();
-        fromto->raise();
-        titleInput->raise();
         titleLine = new QFrame(FilterForm);
         titleLine->setObjectName(QString::fromUtf8("titleLine"));
         titleLine->setGeometry(QRect(750, 60, 181, 21));
@@ -245,7 +235,7 @@ public:
         descr->setWordWrap(true);
         textBrowser = new QTextBrowser(FilterForm);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
-        textBrowser->setGeometry(QRect(10, 540, 441, 21));
+        textBrowser->setGeometry(QRect(10, 540, 701, 21));
         textBrowser->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255, 0);"));
         textBrowser->setFrameShape(QFrame::NoFrame);
         textBrowser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -259,6 +249,9 @@ public:
         line_3->setGeometry(QRect(770, 130, 171, 20));
         line_3->setFrameShape(QFrame::HLine);
         line_3->setFrameShadow(QFrame::Sunken);
+        buttonPopup = new QPushButton(FilterForm);
+        buttonPopup->setObjectName(QString::fromUtf8("buttonPopup"));
+        buttonPopup->setGeometry(QRect(140, 80, 92, 27));
 
         retranslateUi(FilterForm);
 
@@ -282,6 +275,7 @@ public:
 "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Myriad Pro'; font-style:italic;\">Developed by: Alan Ferreir\303\263s, Mauricio Takecita Uehara, Jonatan Dahl - \302\2512012 Paris, France</span></p></body></html>", 0, QApplication::UnicodeUTF8));
         titleLabel->setText(QApplication::translate("FilterForm", "title", 0, QApplication::UnicodeUTF8));
+        buttonPopup->setText(QApplication::translate("FilterForm", "Horfitta", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

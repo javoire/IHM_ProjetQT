@@ -40,6 +40,7 @@ public slots:
     void checkToggled(bool checked, QString name);
 
 private slots:
+    void on_buttonPopup_released();
     void on_titleInput_textChanged(const QString &arg1);
 
     void on_Search_released();

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'filmdisplay.ui'
 **
-** Created: Fri May 11 21:23:37 2012
+** Created: Fri May 11 22:10:47 2012
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -35,7 +35,7 @@ public:
     QLabel *labelLength;
     QFrame *line_2;
     QFrame *line_3;
-    QPushButton *pushButton;
+    QPushButton *buttonClose;
 
     void setupUi(QWidget *FilmDisplay)
     {
@@ -82,12 +82,11 @@ public:
         line_3->setGeometry(QRect(10, 150, 541, 21));
         line_3->setFrameShape(QFrame::HLine);
         line_3->setFrameShadow(QFrame::Sunken);
-        pushButton = new QPushButton(FilmDisplay);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(10, 170, 541, 41));
+        buttonClose = new QPushButton(FilmDisplay);
+        buttonClose->setObjectName(QString::fromUtf8("buttonClose"));
+        buttonClose->setGeometry(QRect(10, 170, 541, 41));
 
         retranslateUi(FilmDisplay);
-        QObject::connect(pushButton, SIGNAL(released()), FilmDisplay, SLOT(close()));
 
         QMetaObject::connectSlotsByName(FilmDisplay);
     } // setupUi
@@ -102,7 +101,7 @@ public:
         labelGenre->setText(QApplication::translate("FilmDisplay", "Horror, Drama, Comedy, Adult", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("FilmDisplay", "Length:", 0, QApplication::UnicodeUTF8));
         labelLength->setText(QApplication::translate("FilmDisplay", "120 min", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("FilmDisplay", "Close", 0, QApplication::UnicodeUTF8));
+        buttonClose->setText(QApplication::translate("FilmDisplay", "Close", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
