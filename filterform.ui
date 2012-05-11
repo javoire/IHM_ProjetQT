@@ -205,24 +205,10 @@ color: rgb(88, 88, 88);</string>
       <x>10</x>
       <y>130</y>
       <width>101</width>
-      <height>171</height>
+      <height>131</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="checkBoxesLeft">
-     <item>
-      <widget class="QCheckBox" name="checkBox">
-       <property name="font">
-        <font>
-         <family>Myriad Pro</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <layout class="QVBoxLayout" name="checkBoxesLeft"/>
    </widget>
    <widget class="QWidget" name="layoutWidget_2">
     <property name="geometry">
@@ -230,7 +216,7 @@ color: rgb(88, 88, 88);</string>
       <x>110</x>
       <y>130</y>
       <width>101</width>
-      <height>171</height>
+      <height>131</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="checkBoxesRight"/>
@@ -276,6 +262,37 @@ border-color: rgb(107, 107, 107);</string>
     </property>
     <property name="placeholderText">
      <string>Title...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Search">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>261</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Myriad Pro</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>Search</string>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

@@ -21,16 +21,26 @@ class FilterForm : public QMainWindow
 public:
     explicit FilterForm(QWidget *parent = 0);
     void placeGenreBoxes();
-    void importGenresFromList(QList<QString> genres);
+    void placeYearSlider(int yearMin, int yearMax);
+    void createGenreCheckBoxes(QList<QString> genres);
     ~FilterForm();
 
 signals:
     void chosenGenres(QList<QString> genres);
+    void yearMinChanged(int yearMin);
+    void yearMaxChanged(int yearMax);
+    void titleChanged(QString title);
+    void searchButtonClicked();
     
 public slots:
     void on_DoubleSlider_valueLowChanged(int value);
     void on_DoubleSlider_valueHighChanged(int value);
     void checkToggled(bool checked, QString name);
+
+private slots:
+    void on_titleInput_textChanged(const QString &arg1);
+
+    void on_Search_released();
 
 private:
     Ui::FilterForm *ui;
@@ -38,6 +48,7 @@ private:
     DoubleSliderWidget* doubleSlider;
     QLineEdit *titleInput;
     QList<QCheckBox*> genreCheckBoxes;
+    QList<QString> chosenGenresList;
 
 };
 
