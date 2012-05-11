@@ -27,14 +27,26 @@ FilterForm::FilterForm(QWidget *parent) : // take a QList here with all the genr
     genres.push_back(QString("Documentary"));
     genres.push_back(QString("Comedy"));
     genres.push_back(QString("Biography"));
+    genres.push_back(QString("Drama"));
+    genres.push_back(QString("Action"));
+    genres.push_back(QString("Romance"));
+    genres.push_back(QString("Thriller"));
+    genres.push_back(QString("Adult"));
+    genres.push_back(QString("Science-Fiction"));
+    genres.push_back(QString("Adventure"));
+    genres.push_back(QString("Mystery"));
+    genres.push_back(QString("Horror"));
+    genres.push_back(QString("Documentary"));
+    genres.push_back(QString("Comedy"));
+    genres.push_back(QString("Biography"));
 
     // temp. these should come from constructor also
     int yearMin = 1930;
     int yearMax = 2012;
 
     // generate UI elements
-    createGenreCheckBoxes(genres);
     placeYearSlider(yearMin, yearMax);
+    createGenreCheckBoxes(genres);
     placeGenreBoxes();
 
 }
@@ -54,7 +66,10 @@ void FilterForm::placeYearSlider(int yearMin, int yearMax) {
 
 }
 
-void FilterForm::createGenreCheckBoxes(QList<QString> genres) {
+bool FilterForm::createGenreCheckBoxes(QList<QString> genres) {
+
+    if (genres.isEmpty())
+        return false;
 
     QFont checkBoxFont;
     checkBoxFont.setFamily(QString::fromUtf8("Myriad Pro"));
@@ -73,9 +88,14 @@ void FilterForm::createGenreCheckBoxes(QList<QString> genres) {
 
         genreCheckBoxes.append(genreBox); // store all in one list
     }
+
+    return true;
 }
 
-void FilterForm::placeGenreBoxes() {
+bool FilterForm::placeGenreBoxes() {
+
+    if(genreCheckBoxes.isEmpty())
+        return false;
 
     // place the checkboxes on UI
     int i;
@@ -87,6 +107,7 @@ void FilterForm::placeGenreBoxes() {
         ui->checkBoxesRight->addWidget(genreCheckBoxes.at(i));
     }
 
+    return true;
 }
 
 void FilterForm::checkToggled(bool checked, QString name) {

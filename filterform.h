@@ -20,9 +20,9 @@ class FilterForm : public QMainWindow
     
 public:
     explicit FilterForm(QWidget *parent = 0);
-    void placeGenreBoxes();
+    bool placeGenreBoxes();
     void placeYearSlider(int yearMin, int yearMax);
-    void createGenreCheckBoxes(QList<QString> genres);
+    bool createGenreCheckBoxes(QList<QString> genres);
     ~FilterForm();
 
 signals:
