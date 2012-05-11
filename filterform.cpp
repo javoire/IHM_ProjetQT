@@ -163,10 +163,9 @@ void FilterForm::on_buttonPopup_released()
     popup->resize(560,220);
     popup->setFrameStyle(6);
 
+    FilmDummy *film = new FilmDummy();
 
-    FilmDisplay *fmd = new FilmDisplay(popup);
-
-//    connect(fmd->ui->, SIGNAL(released()), popup, SLOT(close()));
+    FilmDisplay *fmd = new FilmDisplay(popup, film);
 
     popup->show();
 
