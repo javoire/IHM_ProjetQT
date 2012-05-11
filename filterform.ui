@@ -221,49 +221,6 @@ color: rgb(88, 88, 88);</string>
     </property>
     <layout class="QVBoxLayout" name="checkBoxesRight"/>
    </widget>
-   <widget class="QLineEdit" name="titleInput">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>201</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="font">
-     <font>
-      <family>Myriad Pro</family>
-      <pointsize>20</pointsize>
-      <weight>50</weight>
-      <italic>true</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: italic 20pt &quot;Myriad Pro&quot;;
-color: rgb(88, 88, 88);
-background-color: rgb(252, 252, 252);
-border-color: rgb(107, 107, 107);</string>
-    </property>
-    <property name="frame">
-     <bool>true</bool>
-    </property>
-    <property name="placeholderText">
-     <string>Title...</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Search">
     <property name="geometry">
      <rect>
@@ -294,6 +251,68 @@ border-color: rgb(107, 107, 107);</string>
     <property name="flat">
      <bool>false</bool>
     </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="titleInput">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Myriad Pro</family>
+       <pointsize>20</pointsize>
+       <weight>50</weight>
+       <italic>true</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 20pt &quot;Myriad Pro&quot;;
+color: rgb(88, 88, 88);
+background-color: rgb(252, 252, 252, 0);
+border-color: rgb(107, 107, 107);</string>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Title...</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="Line" name="titleLine">
@@ -340,9 +359,9 @@ border-color: rgb(107, 107, 107);</string>
   <widget class="QLabel" name="descr">
    <property name="geometry">
     <rect>
-     <x>750</x>
+     <x>740</x>
      <y>80</y>
-     <width>181</width>
+     <width>201</width>
      <height>31</height>
     </rect>
    </property>
@@ -353,7 +372,7 @@ border-color: rgb(107, 107, 107);</string>
     </font>
    </property>
    <property name="text">
-    <string>Use the fields below to find the perfect film to see tonight </string>
+    <string>Use the fields below to find the perfect film to see tonight</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

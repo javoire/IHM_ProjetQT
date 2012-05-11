@@ -97,10 +97,13 @@ void FilterForm::checkToggled(bool checked, QString name) {
             chosenGenresList.removeAt(indexToRemove);
     }
 
-    cout << "current chosen genres:" << endl;
+    string genres = "";
     for (int i = 0; i < chosenGenresList.size(); i++) {
-        cout << chosenGenresList.at(i).toStdString() << endl;
+
+        genres = genres + chosenGenresList.at(i).toStdString() + " ";
+
     }
+    cout << "current chosen genres: " << genres << endl;
 
     emit chosenGenres(chosenGenresList);
 }
