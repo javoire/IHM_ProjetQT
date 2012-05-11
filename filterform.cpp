@@ -9,6 +9,7 @@ FilterForm::FilterForm(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FilterForm)
 {
+    ui->setupUi(this);
 
     int yearMin = 1930;
     int yearMax = 2012;
@@ -18,11 +19,21 @@ FilterForm::FilterForm(QWidget *parent) :
     connect(doubleSlider, SIGNAL(valueLowChange(int)), this, SLOT(on_DoubleSlider_valueLowChanged(int)));
     connect(doubleSlider, SIGNAL(valueHighChange(int)), this, SLOT(on_DoubleSlider_valueHighChanged(int)));
 
-    ui->setupUi(this);
+    // fonts
+    checkBoxFont.setFamily(QString::fromUtf8("Myriad Pro"));
+    checkBoxFont.setPointSize(12);
 
-    ui->yearSliderLayout->addWidget(doubleSlider);
+    QCheckBox *checkBox = new QCheckBox(this);
+
+    checkBox->setObjectName(QString::fromUtf8("checkBox2"));
+    checkBox->setText("Check2");
+    checkBox->setFont(checkBoxFont);
+
     ui->labelYearMin->setText(QString::number(yearMin));
     ui->labelYearMax->setText(QString::number(yearMax));
+
+    ui->yearSliderLayout->addWidget(doubleSlider);
+    ui->checkBoxesLeft->addWidget(checkBox);
 
 }
 

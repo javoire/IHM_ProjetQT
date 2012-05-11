@@ -5,6 +5,8 @@
 #include <QWidget>
 #include <QString>
 #include <QSlider>
+#include <QLineEdit>
+#include <QList>
 #include <doublesliderwidget.h>.h>
 
 namespace Ui {
@@ -27,6 +29,9 @@ private:
     Ui::FilterForm *ui;
     QSlider* yearToSlider;
     DoubleSliderWidget* doubleSlider;
+    QLineEdit *titleInput;
+    QFont checkBoxFont;
+    QList<QCheckBox> checkBoxes;
 
 };
 
