@@ -7,7 +7,8 @@
 #include <QSlider>
 #include <QLineEdit>
 #include <QList>
-#include <doublesliderwidget.h>.h>
+#include <doublesliderwidget.h>
+#include <genrecheckbox.h>
 
 namespace Ui {
 class FilterForm;
@@ -19,11 +20,13 @@ class FilterForm : public QMainWindow
     
 public:
     explicit FilterForm(QWidget *parent = 0);
+    void createGenreBoxes();
     ~FilterForm();
     
-private slots:
+public slots:
     void on_DoubleSlider_valueLowChanged(int value);
     void on_DoubleSlider_valueHighChanged(int value);
+    void checkToggled(bool checked);
 
 private:
     Ui::FilterForm *ui;
@@ -31,7 +34,7 @@ private:
     DoubleSliderWidget* doubleSlider;
     QLineEdit *titleInput;
     QFont checkBoxFont;
-    QList<QCheckBox> checkBoxes;
+    QList<QCheckBox*> checkBoxes;
 
 };
 

@@ -13,12 +13,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
     sliderhandle.cpp \
     doublesliderwidget.cpp \
-    filterform.cpp
+    filterform.cpp \
+    genrecheckbox.cpp
 
 HEADERS  += \
     sliderhandle.h \
     doublesliderwidget.h \
-    filterform.h
+    filterform.h \
+    genrecheckbox.h
 
 FORMS    += \
     filterform.ui

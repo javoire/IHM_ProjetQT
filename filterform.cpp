@@ -2,6 +2,7 @@
 #include "ui_filterform.h"
 #include "iostream"
 #include <QtGui>
+#include <genrecheckbox.h>
 
 using namespace std;
 
@@ -19,22 +20,36 @@ FilterForm::FilterForm(QWidget *parent) :
     connect(doubleSlider, SIGNAL(valueLowChange(int)), this, SLOT(on_DoubleSlider_valueLowChanged(int)));
     connect(doubleSlider, SIGNAL(valueHighChange(int)), this, SLOT(on_DoubleSlider_valueHighChanged(int)));
 
-    // fonts
-    checkBoxFont.setFamily(QString::fromUtf8("Myriad Pro"));
-    checkBoxFont.setPointSize(12);
-
-    QCheckBox *checkBox = new QCheckBox(this);
-
-    checkBox->setObjectName(QString::fromUtf8("checkBox2"));
-    checkBox->setText("Check2");
-    checkBox->setFont(checkBoxFont);
-
     ui->labelYearMin->setText(QString::number(yearMin));
     ui->labelYearMax->setText(QString::number(yearMax));
 
     ui->yearSliderLayout->addWidget(doubleSlider);
-    ui->checkBoxesLeft->addWidget(checkBox);
 
+    createGenreBoxes();
+
+}
+
+void FilterForm::createGenreBoxes() {
+    // fonts
+    checkBoxFont.setFamily(QString::fromUtf8("Myriad Pro"));
+    checkBoxFont.setPointSize(12);
+
+    genreCheckBox *checkBox = new genreCheckBox();
+    checkBox->setObjectName("cheeeeck");
+
+//    checkBoxes.append(new QCheckBox());
+
+//    checkBox->setObjectName(QString::fromUtf8("checkBox2"));
+//    checkBox->setText("Check2");
+//    checkBox->setFont(checkBoxFont);
+
+    connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(checkToggled(bool)));
+
+    ui->checkBoxesLeft->addWidget(checkBox);
+}
+
+void FilterForm::checkToggled(bool checked) {
+    cout << checked << endl;
 }
 
 FilterForm::~FilterForm()
