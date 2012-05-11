@@ -2,6 +2,7 @@
 #define FILMDISPLAY_H
 
 #include <QWidget>
+#include "filmdummy.h"
 
 namespace Ui {
 class FilmDisplay;
@@ -12,7 +13,7 @@ class FilmDisplay : public QWidget
     Q_OBJECT
     
 public:
-    explicit FilmDisplay(QWidget *parent = 0);
+    FilmDisplay(QWidget *parent = 0, FilmDummy *film = 0);
     ~FilmDisplay();
     
 private:

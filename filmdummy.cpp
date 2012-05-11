@@ -1,5 +1,9 @@
 #include "filmdummy.h"
 
-filmDummy::filmDummy()
+FilmDummy::FilmDummy()
 {
+    name_ = "Forrest Lump";
+    genre_ = "Horror, Drama, Comedy";
+    rating_ = 85;
+    length_ = 120;
 }
