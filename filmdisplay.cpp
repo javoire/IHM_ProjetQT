@@ -3,7 +3,7 @@
 #include "filmdummy.h"
 #include <QString>
 
-FilmDisplay::FilmDisplay(QFrame *parent, FilmDummy *film) :
+FilmDisplay::FilmDisplay(QWidget *parent, FilmDummy *film) :
     QFrame(parent),
     ui(new Ui::FilmDisplay)
 {

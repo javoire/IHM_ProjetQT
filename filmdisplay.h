@@ -13,10 +13,10 @@ class FilmDisplay : public QFrame
     Q_OBJECT
     
 public:
-    FilmDisplay(QFrame *parent = 0, FilmDummy *film = 0);
+    FilmDisplay(QWidget *parent = 0, FilmDummy *film = 0);
     ~FilmDisplay();
     Ui::FilmDisplay *ui;
-    QFrame *parent1;
+    QWidget *parent1;
 
 private:
 

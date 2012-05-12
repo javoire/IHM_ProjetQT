@@ -159,9 +159,11 @@ void FilterForm::on_buttonPopup_released()
 {
     cout << "clicked" << endl;
 
-    QFrame* popup = new QFrame(this, Qt::Popup | Qt::Window);
-    popup->resize(560,220);
-    popup->setFrameStyle(6);
+//    QFrame* popup = new QFrame(this, Qt::Popup | Qt::Window);
+//    popup->resize(560,220);
+//    popup->setFrameStyle(6);
+
+    QWidget* popup = new QWidget(this, Qt::Popup | Qt::Window);
 
     FilmDummy *film = new FilmDummy();
 
